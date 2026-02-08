@@ -4,5 +4,5 @@ from . import views
 
 app_name = 'bulk_sender'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('send/email/', views.index, name='index'),
 ]

@@ -7,8 +7,8 @@ from email_system import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('email_verifier/', include('email_verifier.urls')),
-    path('bulk_sender/', include('bulk_sender.urls')),
+    path('', include('email_verifier.urls')),
+    path('', include('bulk_sender.urls')),
 ]
 
 if settings.DEBUG:
