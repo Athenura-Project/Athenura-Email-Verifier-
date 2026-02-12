@@ -1,9 +1,8 @@
 import dns.resolver
 
-def is_valid_domain(email):
+def has_mx_record(domain):
     try:
-        domain = email.split("@")[1]
-        dns.resolver.resolve(domain, 'MX')
+        dns.resolver.resolve(domain, "MX")
         return True
     except:
         return False
