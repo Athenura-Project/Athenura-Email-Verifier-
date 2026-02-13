@@ -25,15 +25,17 @@
                 </span>
             </div>
 
-            <div class="relative group">
-                <textarea
-                    name="recipient_list"
-                    readonly
-                    class="w-full h-32 p-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-500 focus:outline-none cursor-not-allowed leading-relaxed shadow-inner"
-                    placeholder="No valid emails available. Please verify a list first.">{% if emails_string %}{{ emails_string }}{% else %}No verified emails found.{% endif %}</textarea>
-
-                <div class="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-slate-50 to-transparent rounded-r-xl pointer-events-none"></div>
-            </div>
+            <div
+      class="flex items-center gap-2 bg-slate-100 p-2 rounded-lg border border-slate-200 w-full max-w-md"
+    >
+      <input
+        type="file"
+        name="emails"
+        required
+        accept=".txt, .csv, .xls, .xlsx"
+        class="text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer w-full"
+      />
+    </div>
 
             <p class="text-[11px] text-slate-400 mt-2 flex items-center gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
