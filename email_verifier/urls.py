@@ -3,5 +3,5 @@ from . import views
 
 app_name = 'email_verifier'
 urlpatterns = [
-    path('', views.index, name='index'),   
+    path('email/verify/', views.index, name='index'),   
 ]

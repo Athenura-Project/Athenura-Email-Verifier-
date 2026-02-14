@@ -46,3 +46,4 @@ htmlcov/
 # Gunicorn / deployment
 *.pid
 *.sock
+mock.html

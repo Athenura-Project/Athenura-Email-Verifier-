@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'email_verifier',
     'bulk_sender',
+    'account',
 ]
 
 MIDDLEWARE = [

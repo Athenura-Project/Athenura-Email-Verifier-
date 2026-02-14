@@ -1,5 +1,6 @@
-{% extends "website/base.html" %}
-{% block content %}
+
+{% extends "website/base.html" %} {% block content %} 
+{% comment %}
 
 <!-- UPLOAD BOX -->
 <div
@@ -48,21 +49,27 @@
 
 <!-- STATS -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-  <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 text-center">
+  <div
+    class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 text-center"
+  >
     <p class="text-slate-500 text-xs uppercase font-bold tracking-wider">
       Total Checked
     </p>
     <p class="text-2xl font-bold text-slate-800">{{ total }}</p>
   </div>
 
-  <div class="bg-white p-6 rounded-2xl shadow-sm border border-green-100 text-center">
+  <div
+    class="bg-white p-6 rounded-2xl shadow-sm border border-green-100 text-center"
+  >
     <p class="text-green-500 text-xs uppercase font-bold tracking-wider">
       Valid Emails
     </p>
     <p class="text-2xl font-bold text-green-600">{{ valid_count }}</p>
   </div>
 
-  <div class="bg-white p-6 rounded-2xl shadow-sm border border-red-100 text-center">
+  <div
+    class="bg-white p-6 rounded-2xl shadow-sm border border-red-100 text-center"
+  >
     <p class="text-red-500 text-xs uppercase font-bold tracking-wider">
       Invalid Emails
     </p>
@@ -72,9 +79,10 @@
 
 <!-- TABLES -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
   <!-- VALID LIST -->
-  <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+  <div
+    class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden"
+  >
     <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
       <h2 class="font-bold text-green-700 flex items-center gap-2">
         <span class="w-2 h-2 bg-green-500 rounded-full"></span> Valid List
@@ -83,7 +91,9 @@
 
     <div class="h-[400px] overflow-y-auto">
       <table class="w-full text-left border-collapse">
-        <thead class="sticky top-0 bg-white shadow-sm text-[11px] uppercase text-slate-400 font-bold">
+        <thead
+          class="sticky top-0 bg-white shadow-sm text-[11px] uppercase text-slate-400 font-bold"
+        >
           <tr>
             <th class="px-6 py-3">#</th>
             <th class="px-6 py-3">Email</th>
@@ -96,14 +106,19 @@
             <td class="px-6 py-4 text-slate-400">{{ forloop.counter }}</td>
             <td class="px-6 py-4 font-medium text-slate-700">{{ email }}</td>
             <td class="px-6 py-4 text-right">
-              <span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded">
+              <span
+                class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded"
+              >
                 VALID
               </span>
             </td>
           </tr>
           {% empty %}
           <tr>
-            <td colspan="3" class="px-6 py-10 text-center text-slate-400 text-sm">
+            <td
+              colspan="3"
+              class="px-6 py-10 text-center text-slate-400 text-sm"
+            >
               No valid emails found
             </td>
           </tr>
@@ -114,7 +129,9 @@
   </div>
 
   <!-- INVALID LIST -->
-  <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+  <div
+    class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden"
+  >
     <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
       <h2 class="font-bold text-red-700 flex items-center gap-2">
         <span class="w-2 h-2 bg-red-500 rounded-full"></span> Invalid List
@@ -123,7 +140,9 @@
 
     <div class="h-[400px] overflow-y-auto">
       <table class="w-full text-left border-collapse">
-        <thead class="sticky top-0 bg-white shadow-sm text-[11px] uppercase text-slate-400 font-bold">
+        <thead
+          class="sticky top-0 bg-white shadow-sm text-[11px] uppercase text-slate-400 font-bold"
+        >
           <tr>
             <th class="px-6 py-3">#</th>
             <th class="px-6 py-3">Email</th>
@@ -134,12 +153,19 @@
           {% for item in invalid %}
           <tr class="hover:bg-red-50/50 transition-colors">
             <td class="px-6 py-4 text-slate-400">{{ forloop.counter }}</td>
-            <td class="px-6 py-4 font-medium text-slate-700">{{ item.email }}</td>
-            <td class="px-6 py-4 italic text-red-400 text-xs">{{ item.reason }}</td>
+            <td class="px-6 py-4 font-medium text-slate-700">
+              {{ item.email }}
+            </td>
+            <td class="px-6 py-4 italic text-red-400 text-xs">
+              {{ item.reason }}
+            </td>
           </tr>
           {% empty %}
           <tr>
-            <td colspan="3" class="px-6 py-10 text-center text-slate-400 text-sm">
+            <td
+              colspan="3"
+              class="px-6 py-10 text-center text-slate-400 text-sm"
+            >
               No invalid emails 🎉
             </td>
           </tr>
@@ -148,22 +174,522 @@
       </table>
     </div>
   </div>
-
 </div>
 {% endif %}
 
-<!-- SAFE JS -->
-<script>
-  const form = document.querySelector("form");
-  if (form) {
-    form.addEventListener("submit", function () {
-      const btn = document.getElementById("submitBtn");
-      if (btn) {
-        btn.disabled = true;
-        btn.innerText = "Processing...";
-      }
-    });
+
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Header Section -->
+  <div class="mb-8">
+    <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+      Email Verification
+    </h1>
+    <p class="text-slate-500 dark:text-slate-400 mt-1">
+      Upload your lists to verify syntax, domain authority, and deliverability.
+    </p>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Left Column: Upload & Progress -->
+    <div class="lg:col-span-2 space-y-8">
+      <!-- Upload Section -->
+      <div
+        class="bg-white dark:bg-slate-900 justifi-center rounded-xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm"
+      >
+        <div
+          class="border-2 border-dashed justify-center border-slate-300 dark:border-slate-700 rounded-xl p-12 text-center hover:border-primary transition-colors cursor-pointer group"
+        >
+          <span
+            class="material-icons text-4xl text-slate-400 group-hover:text-primary mb-4"
+            >cloud_upload</span
+          >
+          <h3 class="text-lg font-semibold mb-1">Upload your email list</h3>
+          <p class="text-slate-500 text-sm mb-6">
+            Drag and drop .csv, .xlsx, or .txt files here
+          </p>
+           <form
+    method="POST"
+    enctype="multipart/form-data"
+    class="flex flex-col items-center gap-4"
+  >
+    {% csrf_token %}
+     <div
+      class="flex items-center gap-2 bg-slate-100 p-2 rounded-lg border border-slate-200 w-full max-w-md"
+    >
+      <input
+        type="file"
+        name="emails"
+        required
+        accept=".txt, .csv, .xls, .xlsx"
+        class="text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer w-full"
+      />
+    </div>
+<button
+      type="submit"
+      id="submitBtn"
+      class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold shadow-lg shadow-blue-200 transition-all"
+    >
+      Verify Emails Now
+    </button>
+  </form>
+
+           
+        
+        </div>
+        
+        <!-- Progress Bar (Visible during active upload/processing) -->
+        <div class="mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-sm font-medium text-slate-700 dark:text-slate-300"
+              >Processing marketing_leads_q4.csv</span
+            >
+            <span class="text-sm font-bold text-primary">65%</span>
+          </div>
+          <div
+            class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden"
+          >
+            <div
+              class="bg-primary h-full w-[65%] rounded-full transition-all duration-500"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <!-- Verification Steps -->
+      <div
+        class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm"
+      >
+        <h3
+          class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-6"
+        >
+          Verification Steps
+        </h3>
+        <div
+          class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 flex items-center justify-center"
+            >
+              <span class="material-icons text-lg">check_circle</span>
+            </div>
+            <div>
+              <p class="text-sm font-semibold">Syntax Check</p>
+              <p class="text-xs text-slate-500">Completed</p>
+            </div>
+          </div>
+          <div
+            class="hidden sm:block h-[2px] flex-1 bg-green-100 dark:bg-green-900/30"
+          ></div>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center animate-pulse"
+            >
+              <span class="material-icons text-lg">dns</span>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-primary">Domain/MX Check</p>
+              <p class="text-xs text-primary/80 italic font-medium">
+                In Progress...
+              </p>
+            </div>
+          </div>
+          <div
+            class="hidden sm:block h-[2px] flex-1 bg-slate-100 dark:bg-slate-800"
+          ></div>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center"
+            >
+              <span class="material-icons text-lg">content_copy</span>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-slate-500">
+                Duplicate Check
+              </p>
+              <p class="text-xs text-slate-400">Waiting</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Right Column: Results Summary -->
+    
+    <div class="space-y-6">
+      <!-- Summary Card: Total -->
+      <div
+        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden"
+      >
+        <div class="relative z-10">
+          <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">
+            Total Processed
+          </p>
+          <h4 class="text-3xl font-bold mt-1">{{ total }}</h4>
+        </div>
+        <span
+          class="material-icons absolute -right-4 -bottom-4 text-8xl text-slate-100 dark:text-slate-800 opacity-50"
+          >list_alt</span
+        >
+      </div>
+      <!-- Summary Card: Valid -->
+      <div
+        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm border-l-4 border-l-green-500"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">
+              Valid Emails
+            </p>
+            <h4 class="text-3xl font-bold mt-1 text-green-600">{{ valid_count }}</h4>
+          </div>
+          <div
+            class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center"
+          >
+            <span class="material-icons text-green-600">done_all</span>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center text-xs text-green-600 font-medium">
+          <span class="material-icons text-xs mr-1">trending_up</span>
+          90% Deliverability Rate
+        </div>
+      </div>
+      <!-- Summary Card: Invalid -->
+      <div
+        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm border-l-4 border-l-red-500"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">
+              Invalid &amp; Risky
+            </p>
+            <h4 class="text-3xl font-bold mt-1 text-red-500">{{ invalid_count }}</h4>
+          </div>
+          <div
+            class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center text-red-600"
+          >
+            <span class="material-icons">report_problem</span>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center text-xs text-red-500 font-medium">
+          <span class="material-icons text-xs mr-1">warning</span>
+          10% Bounce Risk
+        </div>
+      </div>
+      <!-- Quick Export -->
+      <div class="bg-primary rounded-xl p-6 text-white shadow-lg">
+        <h4 class="font-bold mb-4 flex items-center gap-2">
+          <span class="material-icons text-sm">download</span> Export Results
+        </h4>
+        <div class="space-y-3">
+          <button
+            class="w-full bg-white/20 hover:bg-white/30 text-white font-medium py-2 rounded-lg transition-colors flex items-center justify-center gap-2"
+          >
+            Download Valid CSV
+          </button>
+          <button
+          class="w-full bg-white text-primary hover:bg-slate-100 font-bold py-2 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm"
+          >
+          Complete Report (PDF)
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EMPTY FILE MESSAGE -->
+{% if total is not None and total == 0 %}
+<p class="text-center text-slate-400 text-sm mb-6">
+  No emails found in the uploaded file.
+</p>
+{% endif %}
+
+<!-- RESULT SECTION -->
+{% if total is not None and total > 0 %}
+
+<!-- STATS -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+  <div
+    class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 text-center"
+  >
+    <p class="text-slate-500 text-xs uppercase font-bold tracking-wider">
+      Total Checked
+    </p>
+    <p class="text-2xl font-bold text-slate-800">{{ total }}</p>
+  </div>
+
+  <div
+    class="bg-white p-6 rounded-2xl shadow-sm border border-green-100 text-center"
+  >
+    <p class="text-green-500 text-xs uppercase font-bold tracking-wider">
+      Valid Emails
+    </p>
+    <p class="text-2xl font-bold text-green-600">{{ valid_count }}</p>
+  </div>
+
+  <div
+    class="bg-white p-6 rounded-2xl shadow-sm border border-red-100 text-center"
+  >
+    <p class="text-red-500 text-xs uppercase font-bold tracking-wider">
+      Invalid Emails
+    </p>
+    <p class="text-2xl font-bold text-red-600">{{ invalid_count }}</p>
+  </div>
+</div>
+
+<!-- TABLES -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <!-- VALID LIST -->
+  <div
+    class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden"
+  >
+    <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
+      <h2 class="font-bold text-green-700 flex items-center gap-2">
+        <span class="w-2 h-2 bg-green-500 rounded-full"></span> Valid List
+      </h2>
+    </div>
+
+    <div class="h-[400px] overflow-y-auto">
+      <table class="w-full text-left border-collapse">
+        <thead
+          class="sticky top-0 bg-white shadow-sm text-[11px] uppercase text-slate-400 font-bold"
+        >
+          <tr>
+            <th class="px-6 py-3">#</th>
+            <th class="px-6 py-3">Email</th>
+            <th class="px-6 py-3 text-right">Status</th>
+          </tr>
+        </thead>
+        <tbody class="text-sm divide-y divide-slate-50">
+          {% for email in valid %}
+          <tr class="hover:bg-green-50/50 transition-colors">
+            <td class="px-6 py-4 text-slate-400">{{ forloop.counter }}</td>
+            <td class="px-6 py-4 font-medium text-slate-700">{{ email }}</td>
+            <td class="px-6 py-4 text-right">
+              <span
+                class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded"
+              >
+                VALID
+              </span>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td
+              colspan="3"
+              class="px-6 py-10 text-center text-slate-400 text-sm"
+            >
+              No valid emails found
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- INVALID LIST -->
+  <div
+    class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden"
+  >
+    <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
+      <h2 class="font-bold text-red-700 flex items-center gap-2">
+        <span class="w-2 h-2 bg-red-500 rounded-full"></span> Invalid List
+      </h2>
+    </div>
+
+    <div class="h-[400px] overflow-y-auto">
+      <table class="w-full text-left border-collapse">
+        <thead
+          class="sticky top-0 bg-white shadow-sm text-[11px] uppercase text-slate-400 font-bold"
+        >
+          <tr>
+            <th class="px-6 py-3">#</th>
+            <th class="px-6 py-3">Email</th>
+            <th class="px-6 py-3">Reason</th>
+          </tr>
+        </thead>
+        <tbody class="text-sm divide-y divide-slate-50">
+          {% for item in invalid %}
+          <tr class="hover:bg-red-50/50 transition-colors">
+            <td class="px-6 py-4 text-slate-400">{{ forloop.counter }}</td>
+            <td class="px-6 py-4 font-medium text-slate-700">
+              {{ item.email }}
+            </td>
+            <td class="px-6 py-4 italic text-red-400 text-xs">
+              {{ item.reason }}
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td
+              colspan="3"
+              class="px-6 py-10 text-center text-slate-400 text-sm"
+            >
+              No invalid emails 🎉
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endif %}
+  
+</main>
+
+{% endcomment %}
+
+
+
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 overflow-x-hidden">
+  
+  <div class="mb-12 text-center transition-all duration-700 {% if total is not None %} lg:text-left {% endif %}">
+    <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white">Email Verification</h1>
+    <p class="text-slate-500 dark:text-slate-400 mt-2">Verify syntax, domain authority, and deliverability in seconds.</p>
+  </div>
+
+  <div class="grid grid-cols-1 gap-8 transition-all duration-1000 ease-in-out 
+              {% if total is not None %} lg:grid-cols-3 {% else %} max-w-2xl mx-auto {% endif %}">
+    
+    <div class="lg:col-span-2 transition-all duration-700 transform">
+      <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8 shadow-xl">
+        <form method="POST" enctype="multipart/form-data" id="uploadForm" class="flex flex-col items-center">
+          {% csrf_token %}
+          <div class="w-full border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-10 text-center hover:border-blue-500 transition-colors cursor-pointer group relative">
+            <span class="material-icons text-5xl text-blue-500 mb-4">cloud_upload</span>
+            <h3 class="text-lg font-semibold mb-1">{% if total is not None %}Upload another list{% else %}Upload your email list{% endif %}</h3>
+            <p class="text-slate-500 text-sm mb-6">.csv, .xlsx, or .txt files</p>
+            
+            <input type="file" name="emails" required accept=".txt, .csv, .xls, .xlsx"
+              class="absolute inset-0 opacity-0 cursor-pointer"
+              onchange="document.getElementById('fileName').innerText = this.files[0].name"
+            />
+            <p id="fileName" class="text-blue-600 font-bold text-sm h-4"></p>
+          </div>
+
+          <button type="submit" id="submitBtn"
+            class="mt-6 w-full max-w-xs bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-blue-200 transition-all active:scale-95">
+            Verify Emails Now
+          </button>
+        </form>
+      </div>
+    </div>
+
+    {% if total is not None %}
+    <div class="space-y-6 animate-in slide-in-from-right duration-700">
+      <div class="bg-slate-800 p-6 rounded-2xl text-white shadow-lg relative overflow-hidden">
+        <p class="text-slate-400 text-xs uppercase font-black tracking-widest">Total Scanned</p>
+        <h4 class="text-4xl font-black mt-1">{{ total }}</h4>
+        <span class="material-icons absolute -right-2 -bottom-2 text-7xl opacity-10">analytics</span>
+      </div>
+
+      <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border-l-8 border-green-500 shadow-md">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-slate-500 text-xs font-bold uppercase">Valid</p>
+            <h4 class="text-3xl font-bold text-green-600">{{ valid_count }}</h4>
+          </div>
+          <div class="bg-green-100 p-2 rounded-lg text-green-600">
+            <span class="material-icons">verified</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border-l-8 border-red-500 shadow-md">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-slate-500 text-xs font-bold uppercase">Invalid</p>
+            <h4 class="text-3xl font-bold text-red-500">{{ invalid_count }}</h4>
+          </div>
+          <div class="bg-red-100 p-2 rounded-lg text-red-600">
+            <span class="material-icons">error_outline</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if total is not None and total > 0 %}
+  <div class="mt-12 animate-in fade-in slide-in-from-bottom-10 duration-1000">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      
+      <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        <div class="px-6 py-4 bg-green-50/50 border-b border-green-100">
+          <h2 class="font-bold text-green-700 flex items-center gap-2">Valid List</h2>
+        </div>
+        <div class="h-96 overflow-y-auto">
+          <table class="w-full text-left">
+            <tbody class="divide-y divide-slate-100">
+              {% for email in valid %}
+              <tr class="hover:bg-slate-50">
+                <td class="px-6 py-3 text-sm text-slate-700">{{ email }}</td>
+                <td class="px-6 py-3 text-right"><span class="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded">OK</span></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        <div class="px-6 py-4 bg-red-50/50 border-b border-red-100">
+          <h2 class="font-bold text-red-700">Invalid List</h2>
+        </div>
+        <div class="h-96 overflow-y-auto">
+          <table class="w-full text-left">
+            <tbody class="divide-y divide-slate-100">
+              {% for item in invalid %}
+              <tr class="hover:bg-slate-50">
+                <td class="px-6 py-3 text-sm text-slate-700">{{ item.email }}</td>
+                <td class="px-6 py-3 text-xs text-red-400 italic">{{ item.reason }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  {% endif %}
+
+</main>
+
+<style>
+  /* Custom Tailwind-like animations for smooth entry */
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
   }
+  @keyframes slideInBottom {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-in {
+    animation-fill-mode: forwards;
+  }
+  .slide-in-from-right { animation: slideInRight 0.8s ease-out; }
+  .slide-in-from-bottom-10 { animation: slideInBottom 0.8s ease-out; }
+</style>
+
+<script>
+  // Loading state handling
+  const form = document.getElementById("uploadForm");
+  form.addEventListener("submit", function () {
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = true;
+    btn.innerHTML = `
+      <svg class="animate-spin h-5 w-5 mr-3 text-white inline" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      Analyzing...
+    `;
+  });
 </script>
+
+
 
 {% endblock %}

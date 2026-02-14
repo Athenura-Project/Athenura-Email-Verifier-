@@ -1,75 +1,70 @@
-<div class="max-w-5xl mx-auto">
-  <h1 class="text-3xl font-bold text-center text-slate-800 mb-8">
-    Email Verification System
-  </h1>
-
-  <nav class="bg-white border-b border-slate-100 sticky top-0 z-50 shadow-sm rounded-lg mb-6">
-    <div class="px-4 md:px-8">
-      <div class="flex justify-between items-center h-16">
-
-        <!-- LOGO -->
-        <a href="{% url 'email_verifier:index' %}">
-          <div class="flex items-center gap-2">
-            <div class="bg-blue-600 p-1.5 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <span class="text-lg font-bold text-slate-800 tracking-tight">
-              Mail<span class="text-blue-600">Master</span>
-            </span>
+<!-- Top Navigation Bar -->
+<header
+  class="sticky top-0 z-50 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-[#e8e8f3] dark:border-primary/20"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <a href="{% url 'home' %}">
+        <div class="flex items-center gap-2">
+          <div
+            class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center"
+          >
+            <span class="material-symbols-outlined text-xl"
+              >alternate_email</span
+            >
           </div>
+          <span
+            class="text-xl font-extrabold tracking-tight text-[#0f0e1b] dark:text-white"
+            >EmailPro</span
+          >
+        </div></a
+      >
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a
+          class="text-lg font-bold transition-colors {% if request.resolver_match.url_name == 'home' %} hover:text-primary text-primary {% else %} text-[#545095] {% endif %}"
+          href="{% url 'home' %}"
+          >Home</a
+        >
+        <a
+          class="text-lg font-bold text-[#545095] hover:text-primary transition-colors {% if request.resolver_match.app_name == 'email_verifier' %} text-primary {% else %} text-[#545095] {% endif %}"
+          href="{% url 'email_verifier:index' %}"
+          >Email Verifier</a
+        >
+        <a
+          class="text-lg font-bold text-[#545095] hover:text-primary transition-colors {% if request.resolver_match.app_name == 'bulk_sender' %} text-primary {% else %} text-[#545095] {% endif %}"
+          href="{% url 'bulk_sender:index' %}"
+          >Bulk Sender</a
+        >
+      </nav>
+      <!-- Auth Buttons -->
+      <div class="flex items-center gap-3">
+        <!-- Sign In -->
+        <a
+          href="{% url 'account:login' %}"
+          class="px-4 py-2 text-sm font-bold rounded-lg transition-all {% if request.resolver_match.url_name == 'login' %} bg-primary text-white shadow-lg shadow-primary/20 {% else %} text-[#0f0e1b] hover:bg-[#e8e8f3] {% endif %}"
+        >
+          Sign In
         </a>
 
-        <!-- NAV TABS -->
-        <div class="flex items-center justify-center gap-1 bg-slate-200/50 p-1.5 rounded-2xl border border-slate-200 shadow-inner">
-
-          <!-- Verifier -->
-          <a
-            href="{% url 'email_verifier:index' %}"
-            class="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200
-            {% if request.resolver_match.app_name == 'email_verifier' %}
-              bg-white text-blue-600 shadow-sm
-            {% else %}
-              text-slate-500 hover:text-slate-700 hover:bg-slate-200/50
-            {% endif %}">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Verifier
-          </a>
-
-          <!-- Bulk Sender -->
-          <a
-            href="{% url 'bulk_sender:index' %}"
-            class="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200
-            {% if request.resolver_match.app_name == 'bulk_sender' %}
-              bg-white text-blue-600 shadow-sm
-            {% else %}
-              text-slate-500 hover:text-slate-700 hover:bg-slate-200/50
-            {% endif %}">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-            </svg>
-            Bulk Sender
-          </a>
-        </div>
-
-        <!-- STATUS -->
-        <div class="hidden md:flex items-center gap-2 bg-green-50 px-3 py-1 rounded-full border border-green-100">
-          <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-          <span class="text-[10px] font-bold text-green-700 uppercase">
-            System Ready
-          </span>
-        </div>
-
+        <!-- Sign Up -->
+        <a
+          href="{% url 'account:register' %}"
+          class="px-5 py-2 text-sm font-bold rounded-lg transition-all {% if request.resolver_match.url_name == 'register' %} bg-primary text-white shadow-lg shadow-primary/20 {% else %} text-[#0f0e1b] hover:bg-[#e8e8f3] {% endif %}"
+        >
+          Sign Up
+        </a>
       </div>
-    </div>
-  </nav>
+      <div class="flex items-center gap-4">
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-800">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-medium">Alex Rivera</p>
+<p class="text-xs text-slate-500">Pro Plan</p>
 </div>
+<div class="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+<img alt="User Profile" class="h-10 w-10 rounded-full" data-alt="Professional male portrait for profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJPo4HN8y_h5T5VmNsZAdVnx-fhHG31cuBsz3enN-UABBDbHMfK8pekBpW-sxVjId15MbvOXyiWxiUzfLJUK9OpZWNxIahgErWkXWh573EDXayXuo8PqF0vXtXskD-jyea-_pqsQSSDHJnokx_TUbIHd3lSQiu-3DIqSjtiVSYWvGTq-GT3_ubRWuEw6ViyL6ldy1HcdJGtSwG9wXxUdvn3s7613RV4F7jgIoeZ1fO97YbNIzGazj6jUNCYuLdNGAYbm3btSeue1Sw"/>
+</div>
+    </div>
+  </div>
+</header>

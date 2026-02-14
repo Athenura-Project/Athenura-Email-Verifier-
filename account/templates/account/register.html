@@ -1,0 +1,172 @@
+{% extends "website/base.html" %} {% block content %}
+<main class="flex-grow flex items-center justify-center px-4 py-12">
+  <div class="w-full max-w-md">
+    <!-- Registration Card -->
+    <div
+      class="bg-white dark:bg-slate-900 shadow-xl rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800"
+    >
+      <!-- Card Header Image -->
+      <div class="h-32 bg-primary/10 relative overflow-hidden">
+        <div
+          class="absolute inset-0 opacity-20"
+          data-alt="Subtle geometric pattern background"
+          style="
+            background-image: radial-gradient(#5048e5 1px, transparent 1px);
+            background-size: 20px 20px;
+          "
+        ></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-5xl"
+            >person_add</span
+          >
+        </div>
+      </div>
+      <div class="p-8">
+        <div class="text-center mb-8">
+          <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+            Create your account
+          </h1>
+          <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">
+            Start managing your emails more effectively today.
+          </p>
+        </div>
+        <form class="space-y-4">
+          <!-- Full Name Field -->
+          <div class="space-y-1.5">
+            <label
+              class="text-sm font-semibold text-slate-700 dark:text-slate-200"
+              for="full-name"
+              >Full Name</label
+            >
+            <div class="relative">
+              <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
+                >person</span
+              >
+              <input
+                class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
+                id="full-name"
+                placeholder="Enter your name"
+                type="text"
+              />
+            </div>
+          </div>
+          <!-- Email Address Field -->
+          <div class="space-y-1.5">
+            <label
+              class="text-sm font-semibold text-slate-700 dark:text-slate-200"
+              for="email"
+              >Email Address</label
+            >
+            <div class="relative">
+              <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
+                >mail</span
+              >
+              <input
+                class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
+                id="email"
+                placeholder="example@gmail.com"
+                type="email"
+              />
+            </div>
+          </div>
+          <!-- Password Field -->
+          <div class="space-y-1.5">
+            <label
+              class="text-sm font-semibold text-slate-700 dark:text-slate-200"
+              for="password"
+              >Password</label
+            >
+            <div class="relative">
+              <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
+                >lock</span
+              >
+              <input
+                class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
+                id="password"
+                placeholder="••••••••"
+                type="password"
+              />
+            </div>
+          </div>
+          <!-- Confirm Password Field -->
+          <div class="space-y-1.5">
+            <label
+              class="text-sm font-semibold text-slate-700 dark:text-slate-200"
+              for="confirm-password"
+              >Confirm Password</label
+            >
+            <div class="relative">
+              <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
+                >shield</span
+              >
+              <input
+                class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
+                id="confirm-password"
+                placeholder="••••••••"
+                type="password"
+              />
+            </div>
+          </div>
+          <div class="pt-2">
+            <button
+              class="w-full bg-primary text-white font-bold py-3.5 rounded-lg shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
+              type="submit"
+            >
+              Create Account
+              <span class="material-symbols-outlined text-lg"
+                >arrow_forward</span
+              >
+            </button>
+          </div>
+        </form>
+        <div class="mt-8 flex items-center gap-4">
+          <hr class="flex-grow border-slate-200 dark:border-slate-800" />
+          <span
+            class="text-xs font-medium text-slate-400 uppercase tracking-widest"
+            >or sign up with</span
+          >
+          <hr class="flex-grow border-slate-200 dark:border-slate-800" />
+        </div>
+        <div class="mt-6 flex gap-3">
+          <button
+            class="flex-1 flex items-center justify-center gap-2 py-2.5 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+          >
+            <svg class="w-5 h-5" viewbox="0 0 24 24">
+              <path
+                d="M5.266 9.765A7.077 7.077 0 0 1 12 4.909c1.69 0 3.218.6 4.418 1.582L19.91 3C17.782 1.145 15.055 0 12 0 7.27 0 3.198 2.698 1.24 6.65l4.026 3.115z"
+                fill="#EA4335"
+              ></path>
+              <path
+                d="M16.04 18.013c-1.09.582-2.39.918-3.818.918-2.145 0-4.008-1.218-5.006-3.007l-4.116 3.19C5.02 22.33 8.334 24 12 24c3.273 0 6.273-1.091 8.563-2.945l-4.523-3.042z"
+                fill="#34A853"
+              ></path>
+              <path
+                d="M19.833 21.055C22.396 18.982 24 15.737 24 12c0-.764-.065-1.505-.196-2.222H12v4.582h6.741c-.328 1.636-1.255 3.022-2.618 3.927l3.71 2.768z"
+                fill="#4285F4"
+              ></path>
+              <path
+                d="M5.109 16.014a7.046 7.046 0 0 1-.363-2.214c0-.777.13-1.527.363-2.214L1.083 8.471A11.974 11.974 0 0 0 0 12c0 1.265.196 2.484.557 3.628l4.552-3.614z"
+                fill="#FBBC05"
+              ></path>
+            </svg>
+            Google
+          </button>
+        </div>
+        <div class="mt-8 text-center">
+          <p class="text-sm text-slate-500 dark:text-slate-400">
+            Already have an account?
+            <a class="text-primary font-bold hover:underline" href="{% url 'account:login' %}"
+              >Sign In</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
