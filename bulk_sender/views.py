@@ -3,7 +3,10 @@ from celery import group
 from .forms import EmailForm
 from .utils import get_valid_emails
 from .tasks import send_email
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def index(request):
     if request.method == 'POST':
         form = EmailForm(request.POST, request.FILES)

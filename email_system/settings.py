@@ -104,6 +104,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'account.User'
+LOGIN_URL = "account:signin"
+LOGIN_REDIRECT_URL = "email_verifier:index"
+LOGOUT_REDIRECT_URL = "account:signin"
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
@@ -111,8 +116,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = []
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

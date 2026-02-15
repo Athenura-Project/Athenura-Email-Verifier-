@@ -1,0 +1,146 @@
+{% extends "website/base.html" %} {% block content %}
+
+<main class="py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-slate-900">My Profile</h1>
+      <p class="text-slate-500 mt-1">Manage your personal information</p>
+    </div>
+
+    {% if messages %} {% for message in messages %}
+    <div
+      class="mb-4 p-4 rounded-lg text-sm font-medium {% if message.tags == 'success' %} bg-green-50 text-green-700 border border-green-200 {% else %} bg-red-50 text-red-700 border border-red-200 {% endif %}"
+    >
+      {{ message }}
+    </div>
+    {% endfor %} {% endif %}
+
+    <section
+      class="bg-white rounded-xl shadow-sm border custom-border overflow-hidden"
+    >
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Profile Image -->
+        <div
+          class="p-8 border-b custom-border flex flex-col sm:flex-row items-center gap-6"
+        >
+          <div class="relative">
+            {% if request.user.profile.profile_image %}
+            <img
+              src="{{ request.user.profile.profile_image.url }}"
+              class="w-20 h-20 rounded-full object-cover border-2 border-indigo-100"
+            />
+            {% else %}
+            <div
+              class="w-20 h-20 rounded-full bg-indigo-50 border-2 border-indigo-100 flex items-center justify-center text-2xl font-bold text-indigo-600"
+            >
+              {{ request.user.full_name|first|upper }}
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="flex flex-col gap-2 items-center sm:items-start">
+            <input
+              type="file"
+              name="profile_image"
+              class="text-sm"
+              accept=".jpg, .png, .jpeg"
+            />
+            <p class="text-xs text-slate-400">JPG, GIF or PNG.</p>
+          </div>
+        </div>
+
+        <!-- Personal Info -->
+        <div class="p-8 space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Full Name -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-sm font-semibold text-slate-700"
+                >Full Name</label
+              >
+              <input
+                type="text"
+                name="full_name"
+                value="{{ request.user.full_name }}"
+                class="rounded-lg border-slate-300 focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-sm font-semibold text-slate-700"
+                >Email Address</label
+              >
+              <input
+                type="email"
+                value="{{ request.user.email }}"
+                disabled
+                class="w-full rounded-lg border-slate-200 bg-slate-50 text-slate-500 cursor-not-allowed italic"
+              />
+            </div>
+
+            <!-- Phone -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-sm font-semibold text-slate-700"
+                >Phone Number</label
+              >
+              <input
+                type="tel"
+                name="phone_number"
+                value="{{ request.user.profile.phone_number }}"
+                class="rounded-lg border-slate-300 focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
+
+            <!-- DOB -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-sm font-semibold text-slate-700"
+                >Date of Birth</label
+              >
+              <input
+                type="date"
+                name="date_of_birth"
+                value="{{ request.user.profile.date_of_birth|date:'Y-m-d' }}"
+                class="rounded-lg border-slate-300 focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
+          </div>
+
+          <!-- Bio -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-sm font-semibold text-slate-700">Bio</label>
+            <textarea
+              name="bio"
+              rows="4"
+              class="rounded-lg border-slate-300 focus:ring-indigo-500 focus:border-indigo-500"
+            >
+{{ request.user.profile.bio }}</textarea
+            >
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div
+          class="px-8 py-5 bg-slate-50 border-t custom-border flex justify-end items-center gap-4"
+        >
+          <a
+            href="{% url 'home' %}"
+            class="text-slate-600 hover:text-slate-800 font-medium px-4 py-2"
+          >
+            Cancel
+          </a>
+
+          <button
+            type="submit"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-semibold shadow-md"
+          >
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+</main>
+
+{% endblock %}

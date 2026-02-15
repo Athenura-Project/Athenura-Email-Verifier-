@@ -1,15 +1,10 @@
-# from django.shortcuts import render
-
-# # Create your views here.
-# def index(request):
-#     return render(request, 'email_verifier/index.html')
-
-
 from django.shortcuts import render
 from .email_cleaner import clean_emails
 from .duplicate_handler import remove_duplicates
 from .verifier import verify_emails
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def index(request):
     context = {}
 
