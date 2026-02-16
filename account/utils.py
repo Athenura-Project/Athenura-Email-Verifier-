@@ -35,3 +35,35 @@ def send_verification_email(user, verification_link):
     response = requests.post(url, json=payload, headers=headers)
 
     print("Brevo response:", response.status_code, response.text)
+
+
+def send_reset_email(recipient_email, reset_link):
+
+    url = "https://api.brevo.com/v3/smtp/email"
+
+    headers = {
+        "accept": "application/json",
+        "api-key": settings.BREVO_API_KEY,
+        "content-type": "application/json"
+    }
+
+    payload = {
+        "sender": {
+            "name": "EmailPro",
+            "email": settings.DEFAULT_FROM_EMAIL
+        },
+        "to": [
+            {"email": recipient_email}
+        ],
+        "subject": "Reset Your Password",
+        "htmlContent": f"""
+            <h2>Password Reset</h2>
+            <p>Click the button below to reset your password:</p>
+            <a href="{reset_link}" 
+               style="padding:10px 20px;background:#4f46e5;color:white;text-decoration:none;border-radius:5px;">
+               Reset Password
+            </a>
+        """
+    }
+
+    requests.post(url, json=payload, headers=headers)

@@ -1,6 +1,5 @@
 {% extends "website/base.html" %} {% block content %}
 
-<!-- Main Content Area -->
 <main class="flex-grow flex items-center justify-center p-6 sm:p-12">
   <div class="w-full max-w-[440px]">
     <!-- Login Card -->
@@ -44,7 +43,7 @@
             >
             <a
               class="text-xs font-semibold text-primary hover:underline"
-              href="#"
+              href="{% url 'account:forgot_password' %}"
               >Forgot password?</a
             >
           </div>
@@ -59,6 +58,7 @@
             <button
               class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
               type="button"
+              onclick="togglePassword('password', this)"
             >
               <span class="material-symbols-outlined text-[20px]"
                 >visibility</span
@@ -66,6 +66,7 @@
             </button>
           </div>
         </div>
+
         <!-- Remember Me -->
         <div class="flex items-center gap-2">
           <input
