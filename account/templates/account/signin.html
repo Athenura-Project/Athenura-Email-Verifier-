@@ -1,6 +1,5 @@
 {% extends "website/base.html" %} {% block content %}
 
-<!-- Main Content Area -->
 <main class="flex-grow flex items-center justify-center p-6 sm:p-12">
   <div class="w-full max-w-[440px]">
     <!-- Login Card -->
@@ -15,8 +14,9 @@
           Please enter your details to sign in.
         </p>
       </div>
-      <form class="space-y-6">
+      <form class="space-y-6" method="POST" action="{% url 'account:signin' %}">
         <!-- Email Field -->
+        {% csrf_token %}
         <div class="space-y-2">
           <label
             class="text-sm font-medium text-slate-700 dark:text-slate-300"
@@ -27,7 +27,7 @@
             <input
               class="w-full h-12 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none placeholder:text-slate-400 dark:placeholder:text-slate-500"
               id="email"
-              name="email"
+              name="username"
               placeholder="example@gmail.com"
               type="email"
             />
@@ -43,7 +43,7 @@
             >
             <a
               class="text-xs font-semibold text-primary hover:underline"
-              href="#"
+              href="{% url 'account:forgot_password' %}"
               >Forgot password?</a
             >
           </div>
@@ -58,6 +58,7 @@
             <button
               class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
               type="button"
+              onclick="togglePassword('password', this)"
             >
               <span class="material-symbols-outlined text-[20px]"
                 >visibility</span
@@ -65,6 +66,7 @@
             </button>
           </div>
         </div>
+
         <!-- Remember Me -->
         <div class="flex items-center gap-2">
           <input
@@ -109,30 +111,32 @@
         type="button"
       >
         <svg class="w-5 h-5" viewbox="0 0 24 24">
-              <path
-                d="M5.266 9.765A7.077 7.077 0 0 1 12 4.909c1.69 0 3.218.6 4.418 1.582L19.91 3C17.782 1.145 15.055 0 12 0 7.27 0 3.198 2.698 1.24 6.65l4.026 3.115z"
-                fill="#EA4335"
-              ></path>
-              <path
-                d="M16.04 18.013c-1.09.582-2.39.918-3.818.918-2.145 0-4.008-1.218-5.006-3.007l-4.116 3.19C5.02 22.33 8.334 24 12 24c3.273 0 6.273-1.091 8.563-2.945l-4.523-3.042z"
-                fill="#34A853"
-              ></path>
-              <path
-                d="M19.833 21.055C22.396 18.982 24 15.737 24 12c0-.764-.065-1.505-.196-2.222H12v4.582h6.741c-.328 1.636-1.255 3.022-2.618 3.927l3.71 2.768z"
-                fill="#4285F4"
-              ></path>
-              <path
-                d="M5.109 16.014a7.046 7.046 0 0 1-.363-2.214c0-.777.13-1.527.363-2.214L1.083 8.471A11.974 11.974 0 0 0 0 12c0 1.265.196 2.484.557 3.628l4.552-3.614z"
-                fill="#FBBC05"
-              ></path>
-            </svg>
+          <path
+            d="M5.266 9.765A7.077 7.077 0 0 1 12 4.909c1.69 0 3.218.6 4.418 1.582L19.91 3C17.782 1.145 15.055 0 12 0 7.27 0 3.198 2.698 1.24 6.65l4.026 3.115z"
+            fill="#EA4335"
+          ></path>
+          <path
+            d="M16.04 18.013c-1.09.582-2.39.918-3.818.918-2.145 0-4.008-1.218-5.006-3.007l-4.116 3.19C5.02 22.33 8.334 24 12 24c3.273 0 6.273-1.091 8.563-2.945l-4.523-3.042z"
+            fill="#34A853"
+          ></path>
+          <path
+            d="M19.833 21.055C22.396 18.982 24 15.737 24 12c0-.764-.065-1.505-.196-2.222H12v4.582h6.741c-.328 1.636-1.255 3.022-2.618 3.927l3.71 2.768z"
+            fill="#4285F4"
+          ></path>
+          <path
+            d="M5.109 16.014a7.046 7.046 0 0 1-.363-2.214c0-.777.13-1.527.363-2.214L1.083 8.471A11.974 11.974 0 0 0 0 12c0 1.265.196 2.484.557 3.628l4.552-3.614z"
+            fill="#FBBC05"
+          ></path>
+        </svg>
         Sign in with Google
       </button>
     </div>
     <!-- Bottom Text -->
     <p class="mt-8 text-center text-sm text-slate-500 dark:text-slate-400">
       Don't have an account?
-      <a class="font-semibold text-primary hover:underline" href="{% url 'account:register' %}"
+      <a
+        class="font-semibold text-primary hover:underline"
+        href="{% url 'account:signup' %}"
         >Sign up for free</a
       >
     </p>

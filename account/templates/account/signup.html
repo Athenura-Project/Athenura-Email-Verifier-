@@ -30,7 +30,12 @@
             Start managing your emails more effectively today.
           </p>
         </div>
-        <form class="space-y-4">
+        <form
+          class="space-y-4"
+          method="POST"
+          action="{% url 'account:signup' %}"
+        >
+          {% csrf_token %}
           <!-- Full Name Field -->
           <div class="space-y-1.5">
             <label
@@ -46,7 +51,8 @@
               <input
                 class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
                 id="full-name"
-                placeholder="Enter your name"
+                name="full_name"
+                placeholder="Enter your full name"
                 type="text"
               />
             </div>
@@ -68,6 +74,7 @@
                 id="email"
                 placeholder="example@gmail.com"
                 type="email"
+                name="email"
               />
             </div>
           </div>
@@ -76,41 +83,79 @@
             <label
               class="text-sm font-semibold text-slate-700 dark:text-slate-200"
               for="password"
-              >Password</label
             >
+              Password
+            </label>
+
             <div class="relative">
+              <!-- Left Lock Icon -->
               <span
                 class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
-                >lock</span
               >
+                lock
+              </span>
+
+              <!-- Input -->
               <input
-                class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
+                class="w-full pl-10 pr-12 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
                 id="password"
                 placeholder="••••••••"
                 type="password"
+                name="password"
               />
+
+              <!-- Toggle Button -->
+              <button
+                type="button"
+                onclick="togglePassword('password', this)"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors"
+              >
+                <span class="material-symbols-outlined text-[20px]">
+                  visibility
+                </span>
+              </button>
             </div>
           </div>
+
           <!-- Confirm Password Field -->
           <div class="space-y-1.5">
             <label
               class="text-sm font-semibold text-slate-700 dark:text-slate-200"
               for="confirm-password"
-              >Confirm Password</label
             >
+              Confirm Password
+            </label>
+
             <div class="relative">
+              <!-- Left Shield Icon -->
               <span
                 class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
-                >shield</span
               >
+                shield
+              </span>
+
+              <!-- Input -->
               <input
-                class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
+                class="w-full pl-10 pr-12 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
                 id="confirm-password"
                 placeholder="••••••••"
                 type="password"
+                name="confirm_password"
               />
+
+              <!-- Toggle Button -->
+              <button
+                type="button"
+                onclick="togglePassword('confirm-password', this)"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors"
+              >
+                <span class="material-symbols-outlined text-[20px]">
+                  visibility
+                </span>
+              </button>
             </div>
           </div>
+
           <div class="pt-2">
             <button
               class="w-full bg-primary text-white font-bold py-3.5 rounded-lg shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
@@ -159,7 +204,9 @@
         <div class="mt-8 text-center">
           <p class="text-sm text-slate-500 dark:text-slate-400">
             Already have an account?
-            <a class="text-primary font-bold hover:underline" href="{% url 'account:login' %}"
+            <a
+              class="text-primary font-bold hover:underline"
+              href="{% url 'account:signin' %}"
               >Sign In</a
             >
           </p>

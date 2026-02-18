@@ -1,0 +1,95 @@
+<!-- Toast Container -->
+<div id="toast-container"
+     class="fixed top-6 right-6 z-50 flex flex-col gap-4 w-96"></div>
+
+<style>
+@keyframes toastSlideIn {
+    from { transform: translateX(120%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes toastFadeOut {
+    to { opacity: 0; transform: translateX(120%); }
+}
+
+.toast-enter {
+    animation: toastSlideIn 0.4s ease forwards;
+}
+
+.toast-exit {
+    animation: toastFadeOut 0.4s ease forwards;
+}
+</style>
+
+<script>
+function createToast(message, type="success", duration=4000) {
+
+    const colors = {
+        success: "border-green-500 bg-green-50 text-green-800",
+        error: "border-red-500 bg-red-50 text-red-800",
+        warning: "border-yellow-500 bg-yellow-50 text-yellow-800",
+        info: "border-blue-500 bg-blue-50 text-blue-800"
+    };
+
+    const icons = {
+        success: "check_circle",
+        error: "cancel",
+        warning: "warning",
+        info: "info"
+    };
+
+    const toast = document.createElement("div");
+
+    toast.className = `
+        relative flex items-start gap-4 p-4 rounded-2xl shadow-2xl
+        border-l-4 ${colors[type] || colors.info}
+        backdrop-blur-xl toast-enter
+    `;
+
+    toast.innerHTML = `
+        <span class="material-symbols-outlined text-2xl">
+            ${icons[type] || icons.info}
+        </span>
+
+        <div class="flex-1">
+            <p class="font-semibold capitalize">${type}</p>
+            <p class="text-sm opacity-80">${message}</p>
+        </div>
+
+        <button class="text-lg opacity-60 hover:opacity-100 transition"
+                onclick="removeToast(this.parentElement)">
+            ✕
+        </button>
+
+        <div class="absolute bottom-0 left-0 h-1 bg-black/20 progress-bar"></div>
+    `;
+
+    document.getElementById("toast-container").appendChild(toast);
+
+    // Progress Bar
+    const progress = toast.querySelector(".progress-bar");
+    progress.style.width = "100%";
+    progress.style.transition = `width ${duration}ms linear`;
+    setTimeout(() => progress.style.width = "0%", 50);
+
+    // Auto Remove
+    setTimeout(() => removeToast(toast), duration);
+}
+
+function removeToast(toast) {
+    toast.classList.remove("toast-enter");
+    toast.classList.add("toast-exit");
+    setTimeout(() => toast.remove(), 400);
+}
+</script>
+
+<!-- Django Messages Auto Trigger -->
+{% if messages %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    {% for message in messages %}
+        createToast("{{ message|escapejs }}", "{{ message.tags }}");
+    {% endfor %}
+});
+</script>
+{% endif %}

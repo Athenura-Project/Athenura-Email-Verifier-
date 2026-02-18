@@ -47,3 +47,4 @@ htmlcov/
 *.pid
 *.sock
 mock.html
+test.py

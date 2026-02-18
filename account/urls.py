@@ -1,10 +1,23 @@
 from django.urls import path
-from . import views 
-
-
-app_name = 'account'
+from .views import (
+    signup_view, 
+    signin_view, 
+    logout_view, 
+    verify_email, 
+    profile_view, 
+    change_password_view,
+    forgot_password_view,
+    reset_password_view,
+)
+from django.contrib.auth import views as auth_views
+app_name = "account"
 urlpatterns = [
-    path('register/', views.register_view, name='register'),
-    path('login/', views.login_view, name='login'),
-    # path('logout/', views.logout_view, name='logout'),
+    path("signup/", signup_view, name="signup"),
+    path("verify/<uuid:token>/", verify_email, name="verify_email"),
+    path("signin/", signin_view, name="signin"),
+    path("logout/", logout_view, name="logout"),
+    path("profile/", profile_view, name="profile"),
+    path("change-password/", change_password_view, name="change_password"),
+    path("forgot-password/", forgot_password_view, name="forgot_password"),
+    path("reset-password/<uidb64>/<token>/", reset_password_view, name="reset_password"),
 ]

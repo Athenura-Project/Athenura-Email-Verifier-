@@ -1,5 +1,3 @@
-
-
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import csv
@@ -8,8 +6,9 @@ import pandas as pd
 from .email_cleaner import clean_emails
 from .duplicate_handler import remove_duplicates
 from .verifier import verify_emails
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def index(request):
     context = {}
 

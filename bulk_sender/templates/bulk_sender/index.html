@@ -1,211 +1,100 @@
 {% extends "website/base.html" %} {% block content %}
 
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  <!-- Page Header -->
-  <div class="mb-8">
-    <h2 class="text-2xl font-bold text-slate-900 dark:text-white">
-      Create New Campaign
-    </h2>
-    <p class="text-slate-500 dark:text-slate-400 mt-1 text-sm font-medium">
-      Configure your bulk email campaign settings and launch
-    </p>
-  </div>
+<main class="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 py-12 px-4">
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-    <!-- LEFT SIDE -->
-    <div class="lg:col-span-2 space-y-8">
-      <!-- Upload Section -->
-      <section
-        class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden"
-      >
-        <div
-          class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between"
-        >
-          <div class="flex items-center gap-3">
-            <span
-              class="size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm"
-              >1</span
-            >
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white">
-              Recipients List
-            </h3>
-          </div>
-          <span
-            class="text-xs font-medium text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded"
-          >
-            Supported: CSV, XLSX
-          </span>
-        </div>
+  <form method="POST" enctype="multipart/form-data"
+        class="w-full max-w-4xl bg-white dark:bg-slate-900 rounded-2xl shadow-lg p-8 space-y-10">
 
-        <div class="p-6">
-          <div
-            class="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl p-10 text-center bg-slate-50 dark:bg-slate-900/50 hover:border-primary/50 transition-colors cursor-pointer"
-          >
-            <div
-              class="size-14 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4"
-            >
-              <span class="material-symbols-outlined text-3xl"
-                >upload_file</span
-              >
-            </div>
+    {% csrf_token %}
 
-            <p class="text-slate-900 dark:text-white font-semibold">
-              Drop your email list here
-            </p>
-            <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">
-              or click to browse your files
-            </p>
-
-            <label
-  class="mt-4 inline-flex items-center gap-3 px-6 py-3
-         bg-primary hover:bg-primary/90
-         text-white rounded-xl cursor-pointer
-         shadow-md transition-all
-         text-sm font-semibold"
->
-  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-       viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/>
-  </svg>
-
-  Upload File
-  
-  <input
-  type="file"
-  accept=".txt,.csv,.xlsx"
-  class="hidden"
-  onchange="showFileName(this)"
-  />
-</label>
-<p id="fileText" class="mt-2 text-sm text-slate-500">
-  No file selected
-</p>
-
-</div>
-</div>
-      </section>
-
-      <!-- Compose Section -->
-      <section
-        class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden"
-      >
-        <div
-          class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3"
-        >
-          <span
-            class="size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm"
-            >2</span
-          >
-          <h3 class="text-lg font-bold text-slate-900 dark:text-white">
-            Compose Message
-          </h3>
-        </div>
-
-        <div class="p-6 space-y-6">
-          <!-- Subject -->
-          <div>
-            <label class="block text-sm font-semibold mb-2">Subject</label>
-            <input
-              type="text"
-              class="w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 px-4 py-2.5 text-sm shadow-sm"
-              placeholder="Exclusive early access to our summer collection"
-            />
-          </div>
-
-          <!-- Editor -->
-          <div>
-            <label class="block text-sm font-semibold mb-2">Email Body</label>
-
-            <div class="border rounded-lg overflow-hidden shadow-sm">
-              <!-- Toolbar -->
-              <div
-                class="bg-slate-50 dark:bg-slate-800 border-b p-2 flex gap-2"
-              >
-                <button
-                  type="button"
-                  id="boldBtn"
-                  class="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded"
-                >
-                  <span class="material-symbols-outlined">format_bold</span>
-                </button>
-                <button
-                  type="button"
-                  id="italicBtn"
-                  class="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded"
-                >
-                  <span class="material-symbols-outlined">format_italic</span>
-                </button>
-                <button
-                  type="button"
-                  id="underlineBtn"
-                  class="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded"
-                >
-                  <span class="material-symbols-outlined"
-                    >format_underlined</span
-                  >
-                </button>
-              </div>
-
-              <!-- Editor -->
-              <div
-                id="editor"
-                contenteditable="true"
-                class="p-4 min-h-[220px] outline-none"
-              ></div>
-
-              <input type="hidden" id="hiddenMessage" name="message" />
-            </div>
-          </div>
-
-          <!-- Buttons -->
-          <div class="flex justify-end gap-3 pt-4 border-t">
-            <button class="px-6 py-2.5 border rounded-lg">Save Draft</button>
-            <button
-              class="px-8 py-2.5 bg-primary text-white rounded-lg flex gap-2"
-            >
-              Launch Campaign
-              <span class="material-symbols-outlined">send</span>
-            </button>
-          </div>
-        </div>
-      </section>
+    <!-- Page Header -->
+    <div class="text-center">
+      <h2 class="text-3xl font-bold text-slate-900 dark:text-white">
+        Create New Campaign
+      </h2>
+      <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">
+        Configure your bulk email campaign and launch it
+      </p>
     </div>
 
-    <!-- RIGHT SIDEBAR -->
-    <div class="space-y-8">
-      <section
-        class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border p-6"
-      >
-        <h3 class="text-lg font-bold mb-4">Active Progress</h3>
+    <!-- Upload Section -->
+    <section class="space-y-4">
+      <h3 class="text-lg font-semibold">Recipients List (CSV)</h3>
 
-        <div class="mb-4">
-          <div class="flex justify-between text-sm mb-1">
-            <span>Sending emails...</span>
-            <span class="font-bold">65%</span>
-          </div>
-          <div class="w-full bg-slate-200 rounded-full h-2">
-            <div class="bg-primary h-full w-[65%] rounded-full"></div>
-          </div>
-        </div>
+      <div class="border-2 border-dashed rounded-xl p-8 text-center bg-slate-50 dark:bg-slate-800">
 
-        <div class="grid grid-cols-2 gap-4">
-          <div class="p-4 bg-slate-50 rounded-xl text-center">
-            <p class="text-xs uppercase">Success</p>
-            <p class="text-2xl font-bold text-emerald-500">1432</p>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-xl text-center">
-            <p class="text-xs uppercase">Failed</p>
-            <p class="text-2xl font-bold text-rose-500">14</p>
-          </div>
-        </div>
-      </section>
+        <p class="font-medium">Upload your CSV file</p>
+
+        <label class="mt-4 inline-block px-6 py-3
+                       bg-primary text-white rounded-xl cursor-pointer
+                       shadow text-sm font-semibold">
+
+          Choose File
+
+          <input
+            type="file"
+            name="file"
+            accept=".csv"
+            class="hidden"
+            required
+            onchange="showFileName(this)"
+          />
+        </label>
+
+        <p id="fileText" class="mt-2 text-sm text-slate-500">
+          No file selected
+        </p>
+      </div>
+    </section>
+
+    <!-- Subject -->
+    <div>
+      <label class="block text-sm font-semibold mb-2">Subject</label>
+      <input
+        type="text"
+        name="subject"
+        required
+        class="w-full rounded-lg border px-4 py-2.5 text-sm shadow-sm"
+        placeholder="Enter email subject"
+      />
     </div>
-  </div>
+
+    <!-- Editor -->
+    <div>
+      <label class="block text-sm font-semibold mb-2">Email Body</label>
+
+      <div class="border rounded-lg overflow-hidden shadow-sm">
+        <div class="bg-slate-50 border-b p-2 flex gap-2">
+          <button type="button" id="boldBtn" class="p-1.5 font-bold">B</button>
+          <button type="button" id="italicBtn" class="p-1.5 italic">I</button>
+          <button type="button" id="underlineBtn" class="p-1.5 underline">U</button>
+        </div>
+
+        <div
+          id="editor"
+          contenteditable="true"
+          class="p-4 min-h-[200px] outline-none"
+        ></div>
+
+        <input type="hidden" id="hiddenMessage" name="message" />
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="text-center">
+      <button type="submit"
+        class="px-10 py-3 bg-primary text-white rounded-xl shadow-lg font-semibold flex items-center gap-2 mx-auto">
+        Launch Campaign
+        <span class="material-symbols-outlined">send</span>
+      </button>
+    </div>
+
+  </form>
 </main>
 
 <script>
   const editor = document.getElementById("editor");
+  const hiddenMessage = document.getElementById("hiddenMessage");
 
   function format(cmd) {
     editor.focus();
@@ -220,12 +109,11 @@
     hiddenMessage.value = editor.innerHTML;
   });
 
-   function showFileName(input) {
+  function showFileName(input) {
     if (input.files.length > 0) {
       document.getElementById("fileText").innerText =
         input.files[0].name;
     }
   }
 </script>
-
 {% endblock %}
