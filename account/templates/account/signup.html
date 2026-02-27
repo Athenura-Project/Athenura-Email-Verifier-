@@ -1,219 +1,285 @@
-{% extends "website/base.html" %} {% block content %}
-<main class="flex-grow flex items-center justify-center px-4 py-12">
-  <div class="w-full max-w-md">
-    <!-- Registration Card -->
+{% extends "website/base.html" %} 
+{% load static %}
+{% block title %}Sign Up | {{ block.super }}{% endblock %} 
+{% block css %}
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+ {% block content %}
+
+<main
+  class="min-h-screen grid grid-cols-1 lg:grid-cols-2 w-full bg-background-dark overflow-hidden"
+>
+  <div
+    class="hidden lg:flex flex-col justify-around p-12 lg:p-24 relative bg-surface"
+  >
     <div
-      class="bg-white dark:bg-slate-900 shadow-xl rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800"
+      class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] pointer-events-none"
+    ></div>
+    <div
+      class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-[100px] pointer-events-none"
+    ></div>
+    <div
+      class="relative z-10 w-full max-w-lg p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl animate-fade-in-up"
     >
-      <!-- Card Header Image -->
-      <div class="h-32 bg-primary/10 relative overflow-hidden">
+      <div class="flex items-center gap-4 mb-6">
         <div
-          class="absolute inset-0 opacity-20"
-          data-alt="Subtle geometric pattern background"
-          style="
-            background-image: radial-gradient(#5048e5 1px, transparent 1px);
-            background-size: 20px 20px;
-          "
-        ></div>
-        <div class="absolute inset-0 flex items-center justify-center">
-          <span class="material-symbols-outlined text-primary text-5xl"
-            >person_add</span
+          class="p-3 rounded-2xl bg-indigo-500/20 border border-indigo-500/30"
+        >
+          <span class="material-symbols-outlined text-indigo-400 text-3xl"
+            >auto_awesome</span
           >
         </div>
-      </div>
-      <div class="p-8">
-        <div class="text-center mb-8">
-          <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
-            Create your account
-          </h1>
-          <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">
-            Start managing your emails more effectively today.
+        <div>
+          <h3 class="text-xl font-bold text-white tracking-tight">
+            Join the Ecosystem
+          </h3>
+          <p
+            class="text-indigo-300/80 text-sm font-medium uppercase tracking-widest"
+          >
+            Growth & Scalability
           </p>
         </div>
-        <form
-          class="space-y-4"
-          method="POST"
-          action="{% url 'account:signup' %}"
+      </div>
+
+      <div class="space-y-6">
+        <div class="group">
+          <h4
+            class="text-white font-semibold flex items-center gap-2 mb-2 group-hover:text-indigo-300 transition-colors"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            Instant Infrastructure
+          </h4>
+          <p class="text-slate-400 text-sm leading-relaxed ml-3.5">
+            Gain immediate access to enterprise-grade tools. From bulk outreach
+            to AI-driven analysis, your account is ready for high-growth
+            operations.
+          </p>
+        </div>
+
+        <div class="group">
+          <h4
+            class="text-white font-semibold flex items-center gap-2 mb-2 group-hover:text-indigo-300 transition-colors"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            Collaborative Excellence
+          </h4>
+          <p class="text-slate-400 text-sm leading-relaxed ml-3.5">
+            Join 10,000+ businesses utilizing our modular systems to streamline
+            document digitization and verify global communication channels.
+          </p>
+        </div>
+      </div>
+      <div
+        class="absolute -z-10 -bottom-10 -right-10 w-40 h-40 bg-indigo-600/20 blur-[80px] rounded-full"
+      ></div>
+    </div>
+
+    <div class="relative z-10 animate-fade-in-down">
+      <div
+        class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 border border-primary/20"
+      >
+        <span class="material-symbols-outlined text-3xl text-primary"
+          >rocket_launch</span
         >
-          {% csrf_token %}
-          <!-- Full Name Field -->
-          <div class="space-y-1.5">
-            <label
-              class="text-sm font-semibold text-slate-700 dark:text-slate-200"
-              for="full-name"
-              >Full Name</label
+      </div>
+      <h1
+        class="text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight leading-tight"
+      >
+        Unlock High-Growth Potential
+      </h1>
+      <p class="text-lg text-text-muted max-w-md leading-relaxed">
+        Join thousands of businesses scaling their operations with our
+        next-generation email verification and bulk processing tools.
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="flex items-center justify-center p-6 sm:p-12 lg:p-24 relative z-10 border-l border-border-subtle/50 bg-background-dark custom-scrollbar overflow-y-auto"
+  >
+    <div
+      class="w-full max-w-[440px] space-y-8 animate-in slide-in-from-bottom-10 py-8"
+    >
+      <div class="text-center sm:text-left mb-8">
+        <a href="{% url 'home' %}" class="inline-block mb-8">
+          <img
+            src="{% static 'images/White.png' %}"
+            alt="Athenura"
+            class="h-12 mx-auto sm:mx-0"
+          />
+        </a>
+        <h2 class="text-3xl font-bold text-white tracking-tight mb-2">
+          Create your account
+        </h2>
+        <p class="text-text-muted text-sm">
+          Start managing your emails more effectively today.
+        </p>
+      </div>
+
+      <form class="space-y-4" method="POST" action="{% url 'account:signup' %}">
+        {% csrf_token %}
+
+        <div
+          class="space-y-2 relative animation-delay-200 animate-in slide-in-from-bottom-10"
+        >
+          <label
+            class="block text-xs font-bold text-text-muted"
+            for="full-name"
+          >
+            Full Name
+          </label>
+          <div class="relative">
+            <span
+              class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-muted text-[20px]"
+              >person</span
             >
-            <div class="relative">
-              <span
-                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
-                >person</span
-              >
-              <input
-                class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
-                id="full-name"
-                name="full_name"
-                placeholder="Enter your full name"
-                type="text"
-              />
-            </div>
+            <input
+              class="w-full bg-surface border border-border-subtle text-white px-4 py-3.5 pl-12 rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner placeholder:text-text-muted/50"
+              id="full-name"
+              name="full_name"
+              placeholder="Enter your full name"
+              type="text"
+              required
+            />
           </div>
-          <!-- Email Address Field -->
-          <div class="space-y-1.5">
-            <label
-              class="text-sm font-semibold text-slate-700 dark:text-slate-200"
-              for="email"
-              >Email Address</label
+        </div>
+
+        <div
+          class="space-y-2 relative animation-delay-200 animate-in slide-in-from-bottom-10"
+        >
+          <label class="block text-xs font-bold text-text-muted" for="email">
+            Email Address
+          </label>
+          <div class="relative">
+            <span
+              class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-muted text-[20px]"
+              >mail</span
             >
-            <div class="relative">
-              <span
-                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
-                >mail</span
-              >
-              <input
-                class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
-                id="email"
-                placeholder="example@gmail.com"
-                type="email"
-                name="email"
-              />
-            </div>
+            <input
+              class="w-full bg-surface border border-border-subtle text-white px-4 py-3.5 pl-12 rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner placeholder:text-text-muted/50"
+              id="email"
+              name="email"
+              placeholder="example@gmail.com"
+              type="email"
+              required
+            />
           </div>
-          <!-- Password Field -->
-          <div class="space-y-1.5">
-            <label
-              class="text-sm font-semibold text-slate-700 dark:text-slate-200"
-              for="password"
+        </div>
+
+        <div
+          class="space-y-2 relative animation-delay-300 animate-in slide-in-from-bottom-10"
+        >
+          <label class="block text-xs font-bold text-text-muted" for="password">
+            Password
+          </label>
+          <div class="relative">
+            <span
+              class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-muted text-[20px]"
+              >lock</span
             >
-              Password
-            </label>
-
-            <div class="relative">
-              <!-- Left Lock Icon -->
-              <span
-                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
-              >
-                lock
-              </span>
-
-              <!-- Input -->
-              <input
-                class="w-full pl-10 pr-12 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
-                id="password"
-                placeholder="••••••••"
-                type="password"
-                name="password"
-              />
-
-              <!-- Toggle Button -->
-              <button
-                type="button"
-                onclick="togglePassword('password', this)"
-                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors"
-              >
-                <span class="material-symbols-outlined text-[20px]">
-                  visibility
-                </span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Confirm Password Field -->
-          <div class="space-y-1.5">
-            <label
-              class="text-sm font-semibold text-slate-700 dark:text-slate-200"
-              for="confirm-password"
-            >
-              Confirm Password
-            </label>
-
-            <div class="relative">
-              <!-- Left Shield Icon -->
-              <span
-                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
-              >
-                shield
-              </span>
-
-              <!-- Input -->
-              <input
-                class="w-full pl-10 pr-12 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
-                id="confirm-password"
-                placeholder="••••••••"
-                type="password"
-                name="confirm_password"
-              />
-
-              <!-- Toggle Button -->
-              <button
-                type="button"
-                onclick="togglePassword('confirm-password', this)"
-                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors"
-              >
-                <span class="material-symbols-outlined text-[20px]">
-                  visibility
-                </span>
-              </button>
-            </div>
-          </div>
-
-          <div class="pt-2">
+            <input
+              class="w-full bg-surface border border-border-subtle text-white px-4 py-3.5 pl-12 pr-12 rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner placeholder:text-text-muted/50 tracking-widest"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              type="password"
+              required
+            />
             <button
-              class="w-full bg-primary text-white font-bold py-3.5 rounded-lg shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
-              type="submit"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-white transition-colors"
+              type="button"
+              onclick="togglePassword('password', this)"
             >
-              Create Account
-              <span class="material-symbols-outlined text-lg"
-                >arrow_forward</span
+              <span class="material-symbols-outlined text-[20px]"
+                >visibility</span
               >
             </button>
           </div>
-        </form>
-        <div class="mt-8 flex items-center gap-4">
-          <hr class="flex-grow border-slate-200 dark:border-slate-800" />
-          <span
-            class="text-xs font-medium text-slate-400 uppercase tracking-widest"
-            >or sign up with</span
-          >
-          <hr class="flex-grow border-slate-200 dark:border-slate-800" />
         </div>
-        <div class="mt-6 flex gap-3">
-          <button
-            class="flex-1 flex items-center justify-center gap-2 py-2.5 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+
+        <div
+          class="space-y-2 relative animation-delay-400 animate-in slide-in-from-bottom-10"
+        >
+          <label
+            class="block text-xs font-bold text-text-muted"
+            for="confirm-password"
           >
-            <svg class="w-5 h-5" viewbox="0 0 24 24">
-              <path
-                d="M5.266 9.765A7.077 7.077 0 0 1 12 4.909c1.69 0 3.218.6 4.418 1.582L19.91 3C17.782 1.145 15.055 0 12 0 7.27 0 3.198 2.698 1.24 6.65l4.026 3.115z"
-                fill="#EA4335"
-              ></path>
-              <path
-                d="M16.04 18.013c-1.09.582-2.39.918-3.818.918-2.145 0-4.008-1.218-5.006-3.007l-4.116 3.19C5.02 22.33 8.334 24 12 24c3.273 0 6.273-1.091 8.563-2.945l-4.523-3.042z"
-                fill="#34A853"
-              ></path>
-              <path
-                d="M19.833 21.055C22.396 18.982 24 15.737 24 12c0-.764-.065-1.505-.196-2.222H12v4.582h6.741c-.328 1.636-1.255 3.022-2.618 3.927l3.71 2.768z"
-                fill="#4285F4"
-              ></path>
-              <path
-                d="M5.109 16.014a7.046 7.046 0 0 1-.363-2.214c0-.777.13-1.527.363-2.214L1.083 8.471A11.974 11.974 0 0 0 0 12c0 1.265.196 2.484.557 3.628l4.552-3.614z"
-                fill="#FBBC05"
-              ></path>
-            </svg>
-            Google
+            Confirm Password
+          </label>
+          <div class="relative">
+            <span
+              class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-muted text-[20px]"
+              >shield</span
+            >
+            <input
+              class="w-full bg-surface border border-border-subtle text-white px-4 py-3.5 pl-12 pr-12 rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner placeholder:text-text-muted/50 tracking-widest"
+              id="confirm-password"
+              name="confirm_password"
+              placeholder="••••••••"
+              type="password"
+              required
+            />
+            <button
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-white transition-colors"
+              type="button"
+              onclick="togglePassword('confirm-password', this)"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >visibility</span
+              >
+            </button>
+          </div>
+        </div>
+        <div
+          class="flex items-center gap-3 pt-1 pb-2 animation-delay-400 animate-in slide-in-from-bottom-10"
+        >
+          <div class="relative flex items-center">
+            <input
+              class="w-4 h-4 rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-background-dark transition-all cursor-pointer"
+              id="remember"
+              type="checkbox"
+            />
+          </div>
+          <label for="terms" class="text-sm text-gray-600">
+            I agree to the
+            <a href="{% url 'terms_and_conditions' %}" class="text-blue-500 hover:underline"
+              >Terms and Conditions</a
+            >
+          </label>
+        </div>
+        <div
+          class="pt-4 animation-delay-500 animate-in slide-in-from-bottom-10"
+        >
+          <button
+            class="w-full h-12 bg-primary hover:bg-primary-hover text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+            type="submit"
+          >
+            Create Account
+            <span class="material-symbols-outlined text-[18px]"
+              >arrow_forward</span
+            >
           </button>
         </div>
-        <div class="mt-8 text-center">
-          <p class="text-sm text-slate-500 dark:text-slate-400">
-            Already have an account?
-            <a
-              class="text-primary font-bold hover:underline"
-              href="{% url 'account:signin' %}"
-              >Sign In</a
-            >
-          </p>
-        </div>
+      </form>
+
+      <div
+        class="relative py-2 animation-delay-500 animate-in slide-in-from-bottom-10"
+      >
+        <div class="absolute inset-0 flex items-center"></div>
       </div>
+
+      <p
+        class="text-center text-sm text-text-muted animation-delay-500 animate-in fade-in pb-4"
+      >
+        Already have an account?
+        <a
+          class="font-semibold text-primary hover:text-primary-hover transition-colors"
+          href="{% url 'account:signin' %}"
+        >
+          Sign In
+        </a>
+      </p>
     </div>
   </div>
 </main>
-
 {% endblock %}

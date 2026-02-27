@@ -1,145 +1,131 @@
-<!-- ================= NAVBAR ================= -->
+{% load static %}
 <header
-  class="sticky top-0 z-50 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-[#e8e8f3] dark:border-primary/20"
+  class="sticky top-0 z-50 w-full bg-background-dark border-b border-border-subtle"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
-      <!-- ================= LOGO ================= -->
       <a href="{% url 'home' %}" class="flex items-center gap-2">
-        <div
-          class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center"
-        >
-          <span class="material-symbols-outlined text-xl">
-            alternate_email
-          </span>
-        </div>
-        <span
-          class="text-xl font-extrabold tracking-tight text-[#0f0e1b] dark:text-white"
-        >
-          EmailPro
+        <span class="text-xl font-extrabold tracking-tight text-white">
+          <img
+            src="{% static 'images/White.png' %}"
+            alt="Athenura"
+            class="h-11"
+          />
         </span>
       </a>
 
-      <!-- ================= DESKTOP NAV ================= -->
-      <nav class="hidden md:flex items-center space-x-8">
-        <a
-          href="{% url 'home' %}"
-          class="text-lg font-bold transition-colors {% if request.resolver_match.url_name == 'home' %} text-primary {% else %} text-[#545095] hover:text-primary {% endif %}"
-        >
-          Home
-        </a>
-
-        {% if request.user.is_authenticated %}
-        <a
-          href="{% url 'email_verifier:index' %}"
-          class="text-lg font-bold transition-colors {% if request.resolver_match.app_name == 'email_verifier' %} text-primary {% else %} text-[#545095] hover:text-primary {% endif %}"
-        >
-          Email Verifier
-        </a>
-
-        <a
-          href="{% url 'bulk_sender:index' %}"
-          class="text-lg font-bold transition-colors {% if request.resolver_match.app_name == 'bulk_sender' %} text-primary {% else %} text-[#545095] hover:text-primary {% endif %}"
-        >
-          Bulk Sender
-        </a>
-      </nav>
-
-      <!-- ================= AUTH SECTION ================= -->
-      <div class="flex items-center gap-4">
-        <div class="relative">
-          <!-- Avatar Button -->
-          <button
-            id="user-menu-button"
-            class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-800 group"
+      <div class="flex items-center gap-6 sm:gap-8">
+        <nav class="hidden md:flex items-center gap-5">
+          <a
+            href="{% url 'home' %}"
+            class="text-sm font-medium transition-colors {% if request.resolver_match.url_name == 'home' %} text-white {% else %} text-text-muted hover:text-white {% endif %}"
           >
-            <!-- User Info -->
-            <div class="text-right hidden sm:block">
-              <p class="text-sm font-semibold text-[#0f0e1b] dark:text-white">
-                {{ request.user.full_name }}
-              </p>
-              <p class="text-xs text-slate-500">{{ request.user.email }}</p>
-            </div>
+            Home
+          </a>
 
-            <!-- Avatar -->
-            <div
-              class="relative h-10 w-10 rounded-full overflow-hidden border-2 border-primary/30 transition-all duration-300 group-hover:scale-105 group-hover:border-primary"
+          {% if request.user.is_authenticated %}
+          <a
+            href="{% url 'email_verifier:index' %}"
+            class="text-sm font-medium transition-colors {% if request.resolver_match.app_name == 'email_verifier' %} text-white {% else %} text-text-muted hover:text-white {% endif %}"
+          >
+            Email Verifier
+          </a>
+
+          <a
+            href="{% url 'bulk_sender:index' %}"
+            class="text-sm font-medium transition-colors {% if request.resolver_match.app_name == 'bulk_sender' %} text-white {% else %} text-text-muted hover:text-white {% endif %}"
+          >
+            Bulk Sender
+          </a>
+          {% endif %}
+        </nav>
+
+        <div class="flex items-center gap-4">
+          {% if request.user.is_authenticated %}
+          <div class="relative">
+            <button
+              id="user-menu-button"
+              class="flex items-center gap-3 pl-4 sm:pl-6 border-l border-border-subtle group"
             >
-              {% if request.user.profile.profile_image %}
-              <img
-                src="{{ request.user.profile.profile_image.url }}"
-                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-              />
-              {% else %}
-              <div
-                class="h-full w-full flex items-center justify-center bg-gradient-to-br from-primary to-indigo-500 text-white font-bold text-lg"
-              >
-                {{ request.user.full_name|first|upper }}
+              <div class="text-right hidden sm:block">
+                <p class="text-sm font-semibold text-white">
+                  {{ request.user.full_name }}
+                </p>
+                <p class="text-xs text-text-muted">{{ request.user.email }}</p>
               </div>
-              {% endif %}
 
-              <!-- Online Dot -->
-              <span
-                class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 border-2 border-white rounded-full"
-              ></span>
+              <div
+                class="relative h-10 w-10 rounded-full overflow-hidden border-2 border-primary/30 transition-all duration-300 group-hover:scale-105 group-hover:border-primary"
+              >
+                {% if request.user.profile.profile_image %}
+                <img
+                  src="{{ request.user.profile.profile_image.url }}"
+                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                {% else %}
+                <div
+                  class="h-full w-full flex items-center justify-center bg-gradient-to-br from-primary to-indigo-500 text-white font-bold text-lg"
+                >
+                  {{ request.user.full_name|first|upper }}
+                </div>
+                {% endif %}
+
+                <span
+                  class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 border-2 border-background-dark rounded-full"
+                ></span>
+              </div>
+            </button>
+
+            <div
+              id="user-dropdown"
+              class="hidden absolute right-0 mt-4 w-60 bg-surface border border-border-subtle rounded-xl shadow-xl p-2 z-50 animate-fade-in"
+            >
+              <a
+                href="{% url 'account:profile' %}"
+                class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-text-muted hover:text-white hover:bg-[#1e1f32] transition"
+              >
+                <span class="material-symbols-outlined text-base">person</span>
+                Edit Profile
+              </a>
+
+              <a
+                href="{% url 'account:change_password' %}"
+                class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-text-muted hover:text-white hover:bg-[#1e1f32] transition"
+              >
+                <span class="material-symbols-outlined text-base">lock</span>
+                Change Password
+              </a>
+
+              <hr class="my-2 border-border-subtle" />
+
+              <a
+                href="{% url 'account:logout' %}"
+                class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-semibold text-red-400 hover:bg-red-500/10 transition"
+              >
+                <span class="material-symbols-outlined text-base">logout</span>
+                Logout
+              </a>
             </div>
-          </button>
-
-          <!-- Dropdown -->
-          <div
-            id="user-dropdown"
-            class="hidden absolute right-0 mt-4 w-60 bg-white dark:bg-background-dark border border-[#e8e8f3] dark:border-primary/20 rounded-xl shadow-xl p-2 z-50 animate-fade-in"
-          >
-            <!-- Profile -->
-            <a
-              href="{% url 'account:profile' %}"
-              class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-[#545095] hover:bg-[#f4f4ff] dark:hover:bg-primary/10 transition"
-            >
-              <span class="material-symbols-outlined text-base">person</span>
-              Edit Profile
-            </a>
-
-            <!-- Change Password -->
-            <a
-              href="{% url 'account:change_password' %}"
-              class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-[#545095] hover:bg-[#f4f4ff] dark:hover:bg-primary/10 transition"
-            >
-              <span class="material-symbols-outlined text-base">lock</span>
-              Change Password
-            </a>
-
-            <hr class="my-2 border-[#e8e8f3] dark:border-primary/20" />
-
-            <!-- Logout -->
-            <a
-              href="{% url 'account:logout' %}"
-              class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition"
-            >
-              <span class="material-symbols-outlined text-base">logout</span>
-              Logout
-            </a>
           </div>
+
+          {% else %}
+
+          <a
+            href="{% url 'account:signin' %}"
+            class="px-4 py-2 text-sm font-medium rounded-lg transition {% if request.resolver_match.url_name == 'signin' %} bg-primary/90 text-white hover:bg-primary-hover {% else %} text-text-muted hover:text-white {% endif %}"
+          >
+            Sign In
+          </a>
+
+          <a
+            href="{% url 'account:signup' %}"
+            class="px-5 py-2 text-sm font-medium rounded-lg transition {% if request.resolver_match.url_name == 'signup' %} bg-primary text-white shadow-lg shadow-primary/20 {% else %} text-text-muted hover:text-white {% endif %}"
+          >
+            Sign Up
+          </a>
+
+          {% endif %}
         </div>
-
-        {% else %}
-
-        <!-- Sign In -->
-        <a
-          href="{% url 'account:signin' %}"
-          class="px-4 py-2 text-sm font-bold rounded-lg transition {% if request.resolver_match.url_name == 'signin' %} bg-primary text-white shadow-lg shadow-primary/20 {% else %} text-[#0f0e1b] hover:bg-[#e8e8f3] {% endif %}"
-        >
-          Sign In
-        </a>
-
-        <!-- Sign Up -->
-        <a
-          href="{% url 'account:signup' %}"
-          class="px-5 py-2 text-sm font-bold rounded-lg transition {% if request.resolver_match.url_name == 'signup' %} bg-primary text-white shadow-lg shadow-primary/20 {% else %} text-[#0f0e1b] hover:bg-[#e8e8f3] {% endif %}"
-        >
-          Sign Up
-        </a>
-
-        {% endif %}
       </div>
     </div>
   </div>
@@ -160,4 +146,3 @@
     });
   }
 </script>
-<!-- ================= END NAVBAR ================= -->

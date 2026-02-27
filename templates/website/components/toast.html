@@ -1,74 +1,97 @@
-<!-- Toast Container -->
 <div id="toast-container"
-     class="fixed top-6 right-6 z-50 flex flex-col gap-4 w-96"></div>
+     class="fixed top-6 right-6 z-[100] flex flex-col gap-4 w-full max-w-[380px]"></div>
 
 <style>
+/* Smooth Entry and Exit Animations */
 @keyframes toastSlideIn {
-    from { transform: translateX(120%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+    from { transform: translateX(120%) scale(0.9); opacity: 0; }
+    to { transform: translateX(0) scale(1); opacity: 1; }
 }
 
 @keyframes toastFadeOut {
-    to { opacity: 0; transform: translateX(120%); }
+    to { opacity: 0; transform: translateX(120%) scale(0.9); }
 }
 
 .toast-enter {
-    animation: toastSlideIn 0.4s ease forwards;
+    animation: toastSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .toast-exit {
-    animation: toastFadeOut 0.4s ease forwards;
+    animation: toastFadeOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom Scrollbar and helper classes for the toast specifically */
+.toast-glass {
+    background: rgba(20, 21, 34, 0.8) !important; /* bg-surface with transparency */
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
 }
 </style>
 
 <script>
 function createToast(message, type="success", duration=4000) {
 
-    const colors = {
-        success: "border-green-500 bg-green-50 text-green-800",
-        error: "border-red-500 bg-red-50 text-red-800",
-        warning: "border-yellow-500 bg-yellow-50 text-yellow-800",
-        info: "border-blue-500 bg-blue-50 text-blue-800"
+    // Theme-matched colors based on base.html properties
+    const configurations = {
+        success: {
+            border: "border-green-500/50",
+            iconColor: "text-green-400",
+            progress: "bg-green-500/40",
+            icon: "check_circle"
+        },
+        error: {
+            border: "border-red-500/50",
+            iconColor: "text-red-400",
+            progress: "bg-red-500/40",
+            icon: "report"
+        },
+        warning: {
+            border: "border-amber-500/50",
+            iconColor: "text-amber-400",
+            progress: "bg-amber-500/40",
+            icon: "warning"
+        },
+        info: {
+            border: "border-primary/50",
+            iconColor: "text-primary",
+            progress: "bg-primary/40",
+            icon: "info"
+        }
     };
 
-    const icons = {
-        success: "check_circle",
-        error: "cancel",
-        warning: "warning",
-        info: "info"
-    };
-
+    const config = configurations[type] || configurations.info;
     const toast = document.createElement("div");
 
     toast.className = `
-        relative flex items-start gap-4 p-4 rounded-2xl shadow-2xl
-        border-l-4 ${colors[type] || colors.info}
-        backdrop-blur-xl toast-enter
+        relative flex items-center gap-4 p-4 rounded-2xl shadow-2xl 
+        border ${config.border} toast-glass toast-enter group
     `;
 
     toast.innerHTML = `
-        <span class="material-symbols-outlined text-2xl">
-            ${icons[type] || icons.info}
-        </span>
-
-        <div class="flex-1">
-            <p class="font-semibold capitalize">${type}</p>
-            <p class="text-sm opacity-80">${message}</p>
+        <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl bg-background-dark/50 border border-border-subtle">
+            <span class="material-symbols-outlined text-2xl ${config.iconColor}">
+                ${config.icon}
+            </span>
         </div>
 
-        <button class="text-lg opacity-60 hover:opacity-100 transition"
+        <div class="flex-1">
+            <p class="text-sm font-bold text-white tracking-tight capitalize leading-tight">${type}</p>
+            <p class="text-xs text-text-muted mt-0.5 font-medium">${message}</p>
+        </div>
+
+        <button class="w-8 h-8 flex items-center justify-center rounded-lg text-text-muted hover:text-white hover:bg-white/10 transition-all"
                 onclick="removeToast(this.parentElement)">
-            ✕
+            <span class="material-symbols-outlined text-lg">close</span>
         </button>
 
-        <div class="absolute bottom-0 left-0 h-1 bg-black/20 progress-bar"></div>
+        <div class="absolute bottom-0 left-0 h-1 rounded-full ${config.progress} progress-bar mx-1 mb-0.5"></div>
     `;
 
     document.getElementById("toast-container").appendChild(toast);
 
-    // Progress Bar
+    // Progress Bar Animation
     const progress = toast.querySelector(".progress-bar");
-    progress.style.width = "100%";
+    progress.style.width = "calc(100% - 8px)";
     progress.style.transition = `width ${duration}ms linear`;
     setTimeout(() => progress.style.width = "0%", 50);
 
@@ -77,18 +100,24 @@ function createToast(message, type="success", duration=4000) {
 }
 
 function removeToast(toast) {
+    if (!toast) return;
     toast.classList.remove("toast-enter");
     toast.classList.add("toast-exit");
-    setTimeout(() => toast.remove(), 400);
+    setTimeout(() => toast.remove(), 450);
 }
 </script>
 
-<!-- Django Messages Auto Trigger -->
 {% if messages %}
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     {% for message in messages %}
-        createToast("{{ message|escapejs }}", "{{ message.tags }}");
+        // Map Django message tags to our toast types
+        let tag = "{{ message.tags }}";
+        if (tag === "debug" || tag === "info") tag = "info";
+        if (tag === "error") tag = "error";
+        if (tag === "warning") tag = "warning";
+        
+        createToast("{{ message|escapejs }}", tag);
     {% endfor %}
 });
 </script>

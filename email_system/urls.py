@@ -9,6 +9,7 @@ from email_system import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('terms-and-conditions/', views.terms_and_conditions, name='terms_and_conditions'),
     path('', include('email_verifier.urls')),
     path('', include('bulk_sender.urls')),
     path('', include('account.urls')),

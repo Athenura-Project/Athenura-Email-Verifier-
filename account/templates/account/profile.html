@@ -1,127 +1,123 @@
-{% extends "website/base.html" %} {% block content %}
+{% extends "website/base.html" %} 
 
-<main class="py-12 px-4 sm:px-6 lg:px-8">
+{% block title %}My Profile | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+<main class="py-12 px-4 sm:px-6 lg:px-8 bg-background-dark min-h-[calc(100vh-64px)] overflow-x-hidden">
   <div class="max-w-4xl mx-auto">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold text-slate-900">My Profile</h1>
-      <p class="text-slate-500 mt-1">Manage your personal information</p>
+    
+    <div class="mb-8 animate-fade-in-down">
+      <h1 class="text-3xl font-black text-white tracking-tight">My Profile</h1>
+      <p class="text-text-muted mt-2 text-sm">Manage your personal information and settings</p>
     </div>
 
-    <section
-      class="bg-white rounded-xl shadow-sm border custom-border overflow-hidden"
-    >
+    <section class="bg-surface rounded-2xl shadow-xl border border-border-subtle overflow-hidden animate-in slide-in-from-bottom-10">
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
-        <!-- Profile Image -->
-        <div
-          class="p-8 border-b custom-border flex flex-col sm:flex-row items-center gap-6"
-        >
-          <div class="relative">
+        <div class="p-8 border-b border-border-subtle flex flex-col sm:flex-row items-center gap-6 bg-background-dark/30">
+          <div class="relative group">
             {% if request.user.profile.profile_image %}
             <img
               src="{{ request.user.profile.profile_image.url }}"
-              class="w-20 h-20 rounded-full object-cover border-2 border-indigo-100"
+              class="w-24 h-24 rounded-full object-cover border-4 border-surface shadow-lg group-hover:border-primary transition-colors duration-300"
             />
             {% else %}
             <div
-              class="w-20 h-20 rounded-full bg-indigo-50 border-2 border-indigo-100 flex items-center justify-center text-2xl font-bold text-indigo-600"
+              class="w-24 h-24 rounded-full bg-primary/10 border-4 border-surface shadow-lg group-hover:border-primary transition-colors duration-300 flex items-center justify-center text-3xl font-black text-primary"
             >
               {{ request.user.full_name|first|upper }}
             </div>
             {% endif %}
+            
+            <span class="absolute bottom-1 right-1 h-5 w-5 bg-green-500 border-4 border-surface rounded-full"></span>
           </div>
 
           <div class="flex flex-col gap-2 items-center sm:items-start">
-            <input
-              type="file"
-              name="profile_image"
-              class="text-sm"
-              accept=".jpg, .png, .jpeg"
-            />
-            <p class="text-xs text-slate-400">JPG, GIF or PNG.</p>
+            <label class="px-4 py-2 bg-[#1e1f32] hover:bg-border-subtle text-white text-sm font-semibold rounded-lg cursor-pointer transition-colors border border-border-subtle">
+              Change Picture
+              <input
+                type="file"
+                name="profile_image"
+                class="hidden"
+                accept=".jpg, .png, .jpeg"
+                onchange="document.getElementById('file-help').innerText = this.files[0].name"
+              />
+            </label>
+            <p id="file-help" class="text-xs text-text-muted font-medium">JPG, GIF or PNG. Max 2MB.</p>
           </div>
         </div>
 
-        <!-- Personal Info -->
-        <div class="p-8 space-y-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="flex flex-col gap-1.5">
-              <label class="text-sm font-semibold text-slate-700"
-                >Full Name</label
-              >
+        <div class="p-8 space-y-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div class="flex flex-col gap-2 animation-delay-200 animate-in fade-in">
+              <label class="text-xs font-bold uppercase tracking-wider text-text-muted">Full Name</label>
               <input
                 type="text"
                 name="full_name"
                 value="{{ request.user.full_name }}"
-                class="rounded-lg border-slate-300 focus:ring-indigo-500 focus:border-indigo-500"
+                class="w-full rounded-xl bg-background-dark border border-border-subtle px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors shadow-inner"
               />
             </div>
 
-            <div class="flex flex-col gap-1.5">
-              <label class="text-sm font-semibold text-slate-700"
-                >Email Address</label
-              >
+            <div class="flex flex-col gap-2 animation-delay-200 animate-in fade-in">
+              <label class="text-xs font-bold uppercase tracking-wider text-text-muted">Email Address <span class="text-primary/60 ml-1">(Read Only)</span></label>
               <input
                 type="email"
                 value="{{ request.user.email }}"
                 disabled
-                class="w-full rounded-lg border-slate-200 bg-slate-50 text-slate-500 cursor-not-allowed italic"
+                class="w-full rounded-xl bg-background-dark/50 border border-border-subtle/50 px-4 py-3 text-text-muted cursor-not-allowed opacity-70"
               />
             </div>
 
-            <div class="flex flex-col gap-1.5">
-              <label class="text-sm font-semibold text-slate-700"
-                >Phone Number</label
-              >
+            <div class="flex flex-col gap-2 animation-delay-300 animate-in fade-in">
+              <label class="text-xs font-bold uppercase tracking-wider text-text-muted">Phone Number</label>
               <input
                 type="tel"
                 name="phone_number"
                 value="{{ request.user.profile.phone_number }}"
-                class="rounded-lg border-slate-300 focus:ring-indigo-500 focus:border-indigo-500"
+                class="w-full rounded-xl bg-background-dark border border-border-subtle px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors shadow-inner"
+                placeholder="+1 (555) 000-0000"
               />
             </div>
 
-            <div class="flex flex-col gap-1.5">
-              <label class="text-sm font-semibold text-slate-700"
-                >Date of Birth</label
-              >
+            <div class="flex flex-col gap-2 animation-delay-300 animate-in fade-in">
+              <label class="text-xs font-bold uppercase tracking-wider text-text-muted">Date of Birth</label>
               <input
                 type="date"
                 name="date_of_birth"
                 value="{{ request.user.profile.date_of_birth|date:'Y-m-d' }}"
-                class="rounded-lg border-slate-300 focus:ring-indigo-500 focus:border-indigo-500"
+                class="w-full rounded-xl bg-background-dark border border-border-subtle px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors shadow-inner [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-50"
               />
             </div>
           </div>
 
-          <div class="flex flex-col gap-1.5">
-            <label class="text-sm font-semibold text-slate-700">Bio</label>
+          <div class="flex flex-col gap-2 animation-delay-400 animate-in fade-in">
+            <label class="text-xs font-bold uppercase tracking-wider text-text-muted">Bio</label>
             <textarea
               name="bio"
               rows="4"
-              class="rounded-lg border-slate-300 focus:ring-indigo-500 focus:border-indigo-500"
-            >
-{{ request.user.profile.bio }}</textarea
-            >
+              class="w-full rounded-xl bg-background-dark border border-border-subtle px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors shadow-inner custom-scrollbar"
+              placeholder="Tell us a little bit about yourself..."
+            >{{ request.user.profile.bio }}</textarea>
           </div>
         </div>
 
-        <!-- Buttons -->
-        <div
-          class="px-8 py-5 bg-slate-50 border-t custom-border flex justify-end items-center gap-4"
-        >
+        <div class="px-8 py-5 bg-background-dark/50 border-t border-border-subtle flex justify-end items-center gap-4">
           <a
             href="{% url 'home' %}"
-            class="text-slate-600 hover:text-slate-800 font-medium px-4 py-2"
+            class="text-text-muted hover:text-white text-sm font-semibold px-4 py-2 transition-colors"
           >
             Cancel
           </a>
 
           <button
             type="submit"
-            class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-semibold shadow-md"
+            class="bg-primary hover:bg-primary-hover text-white px-8 py-2.5 rounded-xl font-bold shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 active:scale-95 flex items-center gap-2"
           >
+            <span class="material-symbols-outlined text-[20px]">save</span>
             Save Changes
           </button>
         </div>
@@ -129,5 +125,36 @@
     </section>
   </div>
 </main>
+
+<style>
+  /* Smooth entry animations */
+  @keyframes slideInBottom {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .animate-in { animation-fill-mode: forwards; opacity: 0; }
+  .slide-in-from-bottom-10 { animation: slideInBottom 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .animate-fade-in-down { animation: fadeInDown 0.6s ease-out forwards; }
+  .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+  
+  .animation-delay-200 { animation-delay: 150ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 450ms; }
+
+  /* Custom Scrollbar for Textarea */
+  .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #1e1f32; border-radius: 20px; }
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb { background-color: #94a3b8; }
+</style>
 
 {% endblock %}

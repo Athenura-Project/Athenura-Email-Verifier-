@@ -114,7 +114,9 @@ LOGOUT_REDIRECT_URL = "account:signin"
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = []
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -129,7 +131,7 @@ EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS") == "True"
 
 BREVO_API_KEY = os.getenv("BREVO_API_KEY")
 
-DEFAULT_FROM_EMAIL = 'kumarraj741736@gmail.com'
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 CELERY_BROKER_URL = os.getenv(
     "CELERY_BROKER_URL",

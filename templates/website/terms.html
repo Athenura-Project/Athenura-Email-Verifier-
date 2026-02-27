@@ -1,0 +1,342 @@
+{% extends "website/base.html" %}
+{% load static %}
+ {% block title %}Terms and Conditions | {{ block.super }}
+ {% block css %}
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+ {% endblock %} {% block content %}
+
+<main class="min-h-screen bg-background-dark py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 relative">
+    <div class="w-full lg:w-2/3 space-y-12">
+      <header class="animate-fade-in-down border-b border-border-subtle pb-8">
+        <h1
+          class="text-4xl sm:text-5xl font-black text-white mb-3 tracking-tight"
+        >
+          Terms and Conditions
+        </h1>
+        <p class="text-text-muted text-sm font-medium tracking-wide uppercase">
+          Version 2.4.0 <span class="mx-2 text-border-subtle">•</span> Last
+          updated: October 24, 2024
+        </p>
+      </header>
+
+      <div
+        class="space-y-12 text-text-muted leading-relaxed text-[15px] animate-in slide-in-from-bottom-10"
+      >
+        <section id="introduction" class="scroll-mt-24 group">
+          <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+            <span
+              class="material-symbols-outlined text-primary text-[22px] group-hover:scale-110 transition-transform"
+              >info</span
+            >
+            1. Introduction
+          </h2>
+          <div class="space-y-4">
+            <p>
+              Welcome to our Legal Center. These Terms and Conditions govern
+              your use of our website and services. By accessing or using our
+              platform, you agree to be bound by these terms in their entirety.
+              If you do not agree with any part of these terms, you must not use
+              our services.
+            </p>
+            <p>
+              Our goal is to provide a transparent and secure environment for
+              all our users. This document outlines your rights, our
+              responsibilities, and the rules that govern our digital ecosystem.
+            </p>
+          </div>
+        </section>
+
+        <section id="anti-spam" class="scroll-mt-24 group">
+          <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+            <span
+              class="material-symbols-outlined text-primary text-[22px] group-hover:scale-110 transition-transform"
+              >security</span
+            >
+            2. Anti-Spam Policy
+          </h2>
+          <div class="space-y-4">
+            <p>
+              We maintain a zero-tolerance policy regarding spam. Users are
+              prohibited from using our platform to send unsolicited bulk
+              messages or any form of deceptive marketing communication.
+            </p>
+            <p>
+              Any account found to be engaging in spam activities will be
+              immediately suspended without notice. We reserve the right to take
+              legal action against individuals or entities that violate this
+              policy, especially those that compromise the integrity of our
+              network or the privacy of our other users.
+            </p>
+            <ul class="list-disc list-inside space-y-2 pt-2 ml-2">
+              <li>Prohibition of harvested email addresses</li>
+              <li>
+                Mandatory inclusion of valid physical addresses in
+                communications
+              </li>
+              <li>Requirement for clear opt-out mechanisms</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="data-collection" class="scroll-mt-24 group">
+          <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+            <span
+              class="material-symbols-outlined text-primary text-[22px] group-hover:scale-110 transition-transform"
+              >database</span
+            >
+            3. Data Collection
+          </h2>
+          <div class="space-y-4">
+            <p>
+              We collect information to provide better services to all our
+              users. This includes information you provide to us (like your name
+              and email) and information we get from your use of our services
+              (like device information and log data).
+            </p>
+            <p>
+              We use the data we collect to provide, maintain, protect and
+              improve our services, to develop new ones, and to protect our
+              platform and our users.
+            </p>
+
+            <div
+              class="bg-primary/5 border border-primary/20 rounded-xl p-6 mt-6 shadow-inner"
+            >
+              <h4
+                class="text-primary font-bold flex items-center gap-2 mb-2 text-sm uppercase tracking-wider"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_right_alt</span
+                >
+                Key Privacy Note
+              </h4>
+              <p class="text-white text-sm">
+                We never sell your personal data to third parties for marketing
+                purposes. Your privacy is our priority.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="responsibilities" class="scroll-mt-24 group">
+          <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+            <span
+              class="material-symbols-outlined text-primary text-[22px] group-hover:scale-110 transition-transform"
+              >verified_user</span
+            >
+            4. User Responsibilities
+          </h2>
+          <div class="space-y-4">
+            <p>
+              As a user of our platform, you are responsible for maintaining the
+              confidentiality of your account information, including your
+              password, and for all activity that occurs under your account.
+            </p>
+            <p>
+              You agree to notify us immediately of any unauthorized use of your
+              account or password, or any other breach of security. You may be
+              held liable for losses incurred by us or any other user of the
+              site due to someone else using your ID, password, or account.
+            </p>
+          </div>
+        </section>
+
+        <section id="intellectual-property" class="scroll-mt-24 group">
+          <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+            <span
+              class="material-symbols-outlined text-primary text-[22px] group-hover:scale-110 transition-transform"
+              >copyright</span
+            >
+            5. Intellectual Property
+          </h2>
+          <div class="space-y-4">
+            <p>
+              All content included on the site, such as text, graphics, logos,
+              button icons, images, audio clips, digital downloads, data
+              compilations, and software, is the property of the company or its
+              content suppliers and is protected by international copyright
+              laws.
+            </p>
+            <p>
+              The compilation of all content on this site is the exclusive
+              property of the company and protected by international copyright
+              laws. All software used on this site is the property of the
+              company or its software suppliers.
+            </p>
+          </div>
+        </section>
+
+        <section id="liability" class="scroll-mt-24 group">
+          <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+            <span
+              class="material-symbols-outlined text-red-400 text-[22px] group-hover:scale-110 transition-transform"
+              >warning_amber</span
+            >
+            6. Limitation of Liability
+          </h2>
+          <div class="space-y-4">
+            <p>
+              In no event shall the company, its directors, employees, partners,
+              agents, suppliers, or affiliates, be liable for any indirect,
+              incidental, special, consequential or punitive damages, including
+              without limitation, loss of profits, data, use, goodwill, or other
+              intangible losses, resulting from your access to or use of or
+              inability to access or use the service.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <div
+        class="bg-surface border border-border-subtle rounded-2xl p-8 sm:p-10 text-center mt-16 shadow-xl animation-delay-300 animate-in slide-in-from-bottom-10"
+      >
+        <h3 class="text-xl font-bold text-white mb-3">
+          Have you read and understood the terms?
+        </h3>
+        <p
+          class="text-text-muted text-sm mb-8 max-w-md mx-auto leading-relaxed"
+        >
+          By clicking the button below, you confirm that you have read,
+          understood and agree to the Terms and Conditions of our service.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href="{% url 'account:signup' %}"
+            class="bg-primary hover:bg-primary-hover text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 active:scale-95"
+          >
+            Accept and Continue
+          </a>
+          <button
+            class="bg-background-dark hover:bg-[#1e1f32] border border-border-subtle text-white px-8 py-3.5 rounded-xl font-bold shadow-sm transition-all hover:-translate-y-0.5 active:scale-95"
+          >
+            Decline
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <aside
+      class="w-full lg:w-1/3 hidden lg:block animation-delay-400 animate-in slide-in-from-bottom-10"
+    >
+      <div class="sticky top-28 space-y-6">
+        <div
+          class="bg-surface border border-border-subtle rounded-2xl p-6 shadow-xl"
+        >
+          <h3
+            class="text-[11px] font-black text-text-muted uppercase tracking-[0.15em] mb-5"
+          >
+            Table of Contents
+          </h3>
+          <ul class="space-y-1.5 text-sm">
+            <li>
+              <a
+                href="#introduction"
+                class="flex items-center gap-3 bg-primary/10 text-primary px-4 py-2.5 rounded-xl font-medium transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px]">info</span>
+                Introduction
+              </a>
+            </li>
+            <li>
+              <a
+                href="#anti-spam"
+                class="flex items-center gap-3 text-text-muted hover:text-white hover:bg-background-dark px-4 py-2.5 rounded-xl transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >security</span
+                >
+                Anti-Spam Policy
+              </a>
+            </li>
+            <li>
+              <a
+                href="#data-collection"
+                class="flex items-center gap-3 text-text-muted hover:text-white hover:bg-background-dark px-4 py-2.5 rounded-xl transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >database</span
+                >
+                Data Collection
+              </a>
+            </li>
+            <li>
+              <a
+                href="#responsibilities"
+                class="flex items-center gap-3 text-text-muted hover:text-white hover:bg-background-dark px-4 py-2.5 rounded-xl transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >verified_user</span
+                >
+                Responsibilities
+              </a>
+            </li>
+            <li>
+              <a
+                href="#intellectual-property"
+                class="flex items-center gap-3 text-text-muted hover:text-white hover:bg-background-dark px-4 py-2.5 rounded-xl transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >copyright</span
+                >
+                Intellectual Property
+              </a>
+            </li>
+            <li>
+              <a
+                href="#liability"
+                class="flex items-center gap-3 text-text-muted hover:text-white hover:bg-background-dark px-4 py-2.5 rounded-xl transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >warning_amber</span
+                >
+                Limitation of Liability
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="bg-surface border border-border-subtle rounded-2xl p-6 shadow-xl"
+        >
+          <h3
+            class="text-[11px] font-black text-text-muted uppercase tracking-[0.15em] mb-4"
+          >
+            Reading Progress
+          </h3>
+          <div class="flex items-end justify-between mb-3">
+            <span class="text-3xl font-black text-primary leading-none"
+              >35%</span
+            >
+            <span class="text-xs font-medium text-text-muted"
+              >Section 2 of 6</span
+            >
+          </div>
+          <div
+            class="w-full bg-background-dark rounded-full h-1.5 overflow-hidden border border-border-subtle/50"
+          >
+            <div class="bg-primary h-1.5 rounded-full w-[35%]"></div>
+          </div>
+        </div>
+
+        <div
+          class="bg-surface border border-border-subtle rounded-2xl p-6 shadow-xl"
+        >
+          <h3 class="text-sm font-bold text-white mb-2">Need Help?</h3>
+          <p class="text-xs text-text-muted mb-5 leading-relaxed">
+            Our legal team is available for any questions regarding these terms.
+          </p>
+          <a
+            href="#"
+            class="block w-full text-center bg-background-dark hover:bg-[#1e1f32] border border-border-subtle text-white py-3 rounded-xl text-sm font-bold transition-all shadow-sm"
+          >
+            Contact Support
+          </a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+{% endblock %}
