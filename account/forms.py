@@ -9,10 +9,11 @@ from .password_validators import validate_strong_password
 class SignUpForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, validators=[validate_strong_password])
     confirm_password = forms.CharField(widget=forms.PasswordInput)
+    terms_accepted = forms.BooleanField(required=True, error_messages={"required": "You must accept the terms and conditions."})
 
     class Meta:
         model = User
-        fields = ["full_name", "email", "password"]
+        fields = ["full_name", "email", "password", "terms_accepted"]
 
     def clean_email(self):
         email = self.cleaned_data.get("email")

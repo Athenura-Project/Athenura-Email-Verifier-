@@ -45,15 +45,19 @@ def signup_view(request):
                 "Account created successfully! Please check your email to verify your account."
             )
 
-            return render(request, "account/signin.html")
+            return redirect("account:signin")
 
         else:
             for error in form.non_field_errors():
+                print(error)
                 messages.error(request, error)
 
             for field in form:
                 for error in field.errors:
+                    print(error)
                     messages.error(request, error)
+            
+            return redirect("account:signup")
 
     else:
         form = SignUpForm()

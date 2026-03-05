@@ -9,7 +9,6 @@ from .views import (
     forgot_password_view,
     reset_password_view,
 )
-from django.contrib.auth import views as auth_views
 app_name = "account"
 urlpatterns = [
     path("signup/", signup_view, name="signup"),
