@@ -21,18 +21,55 @@ def signup_view(request):
         return redirect("email_verifier:index")
 
     if request.method == "POST":
+        # 1. Capture the form data to preserve it if validation fails
+        form_data = {
+            'full_name': request.POST.get('full_name', ''),
+            'email': request.POST.get('email', ''),
+            'terms': request.POST.get('terms', '')
+        }
+
+        # 2. Check Terms and Conditions explicitly
+        if not request.POST.get('terms'):
+            messages.error(request, "You must agree to the Terms and Conditions first.")
+            return render(request, "account/signup.html", {"form_data": form_data})
+
+        # 3. Check if Passwords match
+        password = request.POST.get("password")
+        confirm_password = request.POST.get("confirm_password")
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match.")
+            return render(request, "account/signup.html", {"form_data": form_data})
+
+        # 4. Check Password Strength using your custom validator
+        try:
+            validate_strong_password(password)
+        except ValidationError as e:
+            # Display the specific password error (e.g., "Must contain a number")
+            for msg in e.messages:
+                messages.error(request, msg)
+            return render(request, "account/signup.html", {"form_data": form_data})
+
+        # 5. Check if Email already exists
+        if User.objects.filter(email=form_data['email']).exists():
+            messages.error(request, "This email is already in use. Please sign in.")
+            return render(request, "account/signup.html", {"form_data": form_data})
+
+        # 6. Pass data to your SignUpForm for final model validation/saving
         form = SignUpForm(request.POST)
 
         if form.is_valid():
             user = form.save(commit=False)
-            user.set_password(form.cleaned_data["password"])
+            user.set_password(password)
             user.is_active = False
             user.is_verified = False
+            
+            # If your custom User model requires a full_name, save it here
+            # user.full_name = form_data['full_name'] 
+            
             user.save()
 
-            # create verification token
+            # Create verification token
             verification = EmailVerification.objects.create(user=user)
-
             verification_link = request.build_absolute_uri(
                 reverse("account:verify_email", args=[verification.token])
             )
@@ -44,25 +81,22 @@ def signup_view(request):
                 request,
                 "Account created successfully! Please check your email to verify your account."
             )
-
             return redirect("account:signin")
 
         else:
+            # If the SignUpForm catches any other errors, display them
             for error in form.non_field_errors():
-                print(error)
                 messages.error(request, error)
 
             for field in form:
                 for error in field.errors:
-                    print(error)
                     messages.error(request, error)
             
-            return redirect("account:signup")
+            return render(request, "account/signup.html", {"form_data": form_data})
 
     else:
-        form = SignUpForm()
-
-    return render(request, "account/signup.html", {"form": form})
+        # GET request: render empty form
+        return render(request, "account/signup.html", {"form_data": {}})
 
 # -------------------Profile View ----------------------
 

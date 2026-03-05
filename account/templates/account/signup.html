@@ -1,10 +1,7 @@
-{% extends "website/base.html" %} 
-{% load static %}
-{% block title %}Sign Up | {{ block.super }}{% endblock %} 
-{% block css %}
-      <link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% endblock %}
- {% block content %}
+{% extends "website/base.html" %} {% load static %} {% block title %}Sign Up |
+{{ block.super }}{% endblock %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock %} {% block content %}
 
 <main
   class="min-h-80vh grid grid-cols-1 lg:grid-cols-2 w-full bg-background-dark overflow-hidden"
@@ -95,10 +92,10 @@
   </div>
 
   <div
-    class="flex items-center justify-center p-6 sm:p-12 lg:p-24 relative z-10 border-l border-border-subtle/50 bg-background-dark custom-scrollbar overflow-y-auto"
+    class="flex flex-col justify-center p-6 sm:p-12 lg:p-24 relative z-10 border-l border-border-subtle/50 bg-background-dark custom-scrollbar overflow-y-auto"
   >
     <div
-      class="w-full max-w-[440px] space-y-8 animate-in slide-in-from-bottom-10 py-8"
+      class="w-full max-w-[440px] my-auto mx-auto space-y-8 animate-in slide-in-from-bottom-10 py-8"
     >
       <div class="text-center sm:text-left mb-8">
         <a href="{% url 'home' %}" class="inline-block mb-8">
@@ -139,6 +136,7 @@
               name="full_name"
               placeholder="Enter your full name"
               type="text"
+              value="{{ form_data.full_name|default:'' }}"
               required
             />
           </div>
@@ -161,6 +159,7 @@
               name="email"
               placeholder="example@gmail.com"
               type="email"
+              value="{{ form_data.email|default:'' }}"
               required
             />
           </div>
@@ -237,13 +236,21 @@
             <input
               class="w-4 h-4 rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-background-dark transition-all cursor-pointer"
               id="terms"
-              name="terms_accepted"
+              name="terms"
               type="checkbox"
+              {%
+              if
+              form_data.terms
+              %}checked{%
+              endif
+              %}
             />
           </div>
-          <label for="terms" class="text-sm text-gray-600">
+          <label for="terms" class="text-sm text-gray-600 cursor-pointer">
             I agree to the
-            <a href="{% url 'terms_and_conditions' %}" class="text-blue-500 hover:underline"
+            <a
+              href="{% url 'terms_and_conditions' %}"
+              class="text-blue-500 hover:underline"
               >Terms and Conditions</a
             >
           </label>
@@ -269,9 +276,7 @@
         <div class="absolute inset-0 flex items-center"></div>
       </div>
 
-      <p
-        class="text-center text-sm text-text-muted animation-delay-500 animate-in fade-in pb-4"
-      >
+      <p class="text-center text-sm text-text-muted pb-4">
         Already have an account?
         <a
           class="font-semibold text-primary hover:text-primary-hover transition-colors"
