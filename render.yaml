@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: email-verifier
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn email_system.wsgi:application"
+
+  - type: worker
+    name: celery-worker
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "celery -A email_system worker -l info"
