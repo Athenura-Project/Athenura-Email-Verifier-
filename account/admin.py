@@ -34,7 +34,7 @@ class UserAdmin(BaseUserAdmin):
             )
         }),
         ('Email Stats', {
-            'fields': ('daily_limit', 'total_sent_today')
+            'fields': ('total_sent_emails',)
         }),
         ('Important Dates', {'fields': ('last_login', 'date_joined')}),
     )

@@ -12,6 +12,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .tokens import password_reset_token
 from django.core.exceptions import ValidationError
 from .password_validators import validate_strong_password
+from django.conf import settings
 
 
 # ---------------- SIGNUP VIEW ----------------
@@ -23,36 +24,42 @@ def signup_view(request):
     form = SignUpForm()
     if request.method == "POST":
         form = SignUpForm(request.POST)
+        secret_key = request.POST.get("secret_key")
 
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data["password"])
-            user.is_active = False
-            user.is_verified = False   
-            user.save()
+        if secret_key == settings.SECRET_KEY:
 
-            # Create verification token
-            verification = EmailVerification.objects.create(user=user)
-            verification_link = request.build_absolute_uri(
-                reverse("account:verify_email", args=[verification.token])
-            )
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.set_password(form.cleaned_data["password"])
+                user.is_active = False
+                user.is_verified = False   
+                user.save()
 
-            print("Verification:", verification_link)
-            send_verification_email(user, verification_link)
+                # Create verification token
+                verification = EmailVerification.objects.create(user=user)
+                verification_link = request.build_absolute_uri(
+                    reverse("account:verify_email", args=[verification.token])
+                )
 
-            messages.success(
-                request,
-                "Account created successfully! Please check your email to verify your account."
-            )
-            return redirect("account:signin")
+                # print("Verification:", verification_link)
+                send_verification_email(user, verification_link)
 
-        else:
-            for error in form.non_field_errors():
-                messages.error(request, error)
+                messages.success(
+                    request,
+                    "Account created successfully! Please check your email to verify your account."
+                )
+                return redirect("account:signin")
 
-            for field in form:
-                for error in field.errors:
+            else:
+                for error in form.non_field_errors():
                     messages.error(request, error)
+
+                for field in form:
+                    for error in field.errors:
+                        messages.error(request, error)
+        
+        else:
+            messages.error(request, "Secret key is not matched.")
  
     return render(request, "account/signup.html", {"form": form})
 
@@ -127,7 +134,7 @@ def signin_view(request):
                     return redirect("account:signin")
 
                 login(request, user)
-                messages.success(request, "Login successful!")
+                messages.success(request, f"Welcome {user.full_name}")
                 return redirect("email_verifier:index")
 
         else:
@@ -186,7 +193,7 @@ def forgot_password_view(request):
                     "token": token
                 })
             )
-            print("reset link:", reset_link)
+            # print("reset link:", reset_link)
 
             # Send email using Brevo API
             send_reset_email(email, reset_link)

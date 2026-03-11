@@ -49,7 +49,7 @@ def index(request):
 
             job.apply_async()
 
-            messages.success(request, "Emails are being sent in background!")
+            messages.success(request, "Emails are being sent.")
             return redirect("bulk_sender:index")
 
     else:

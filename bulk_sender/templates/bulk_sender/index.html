@@ -1,19 +1,23 @@
-{% extends "website/base.html" %} 
+{% extends "website/base.html" %} {% block title %}Email Sender | {{ block.super}}{% endblock %} {% block content %}
 
-{% block title %}Bulk Email Sender | {{ block.super }}{% endblock %}
-
-{% block content %}
-
-<main class="min-h-[calc(100vh-64px)] flex items-center justify-center py-12 px-4 overflow-x-hidden">
-
-  <form method="POST" enctype="multipart/form-data" id="campaignForm"
-        class="w-full max-w-4xl bg-surface border border-border-subtle rounded-3xl shadow-2xl p-8 sm:p-10 space-y-10 animate-in slide-in-from-bottom-10">
-
+<main
+  class="min-h-[calc(100vh-64px)] flex items-center justify-center py-12 px-4 overflow-x-hidden"
+>
+  <form
+    method="POST"
+    enctype="multipart/form-data"
+    id="campaignForm"
+    class="w-full max-w-4xl bg-surface border border-border-subtle rounded-3xl shadow-2xl p-8 sm:p-10 space-y-10 animate-in slide-in-from-bottom-10"
+  >
     {% csrf_token %}
 
     <div class="text-center animate-fade-in-down">
-      <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-primary/20">
-        <span class="material-symbols-outlined text-3xl text-primary">campaign</span>
+      <div
+        class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-primary/20"
+      >
+        <span class="material-symbols-outlined text-3xl text-primary"
+          >campaign</span
+        >
       </div>
       <h2 class="text-3xl font-black text-white tracking-tight">
         Create New Campaign
@@ -23,14 +27,25 @@
       </p>
     </div>
 
-    <section class="space-y-3 animation-delay-200 animate-in slide-in-from-bottom-10">
-      <h3 class="text-sm font-bold text-white uppercase tracking-wider">Recipients List (CSV)</h3>
+    <section
+      class="space-y-3 animation-delay-200 animate-in slide-in-from-bottom-10"
+    >
+      <h3 class="text-sm font-bold text-white uppercase tracking-wider">
+        Recipients List (CSV)
+      </h3>
 
-      <div class="border-2 border-dashed border-border-subtle hover:border-primary hover:bg-primary/5 transition-all duration-300 rounded-2xl p-8 text-center bg-background-dark/50 group relative">
-        <span class="material-symbols-outlined text-4xl text-text-muted group-hover:text-primary transition-colors mb-3 block">description</span>
+      <div
+        class="border-2 border-dashed border-border-subtle hover:border-primary hover:bg-primary/5 transition-all duration-300 rounded-2xl p-8 text-center bg-background-dark/50 group relative"
+      >
+        <span
+          class="material-symbols-outlined text-4xl text-text-muted group-hover:text-primary transition-colors mb-3 block"
+          >description</span
+        >
         <p class="font-medium text-white mb-4">Upload your verified CSV file</p>
 
-        <label class="inline-flex items-center gap-2 px-6 py-2.5 bg-surface border border-border-subtle hover:border-primary text-white rounded-xl cursor-pointer shadow-lg hover:-translate-y-0.5 transition-all text-sm font-semibold">
+        <label
+          class="inline-flex items-center gap-2 px-6 py-2.5 bg-surface border border-border-subtle hover:border-primary text-white rounded-xl cursor-pointer shadow-lg hover:-translate-y-0.5 transition-all text-sm font-semibold"
+        >
           <span class="material-symbols-outlined text-lg">upload_file</span>
           Choose File
           <input
@@ -43,13 +58,15 @@
           />
         </label>
 
-        <p id="fileText" class="mt-4 text-sm text-primary font-medium h-5">
-          </p>
+        <p id="fileText" class="mt-4 text-sm text-primary font-medium h-5"></p>
       </div>
     </section>
 
     <div class="animation-delay-300 animate-in slide-in-from-bottom-10">
-      <label class="block text-sm font-bold text-white uppercase tracking-wider mb-3">Email Subject</label>
+      <label
+        class="block text-sm font-bold text-white uppercase tracking-wider mb-3"
+        >Email Subject</label
+      >
       <input
         type="text"
         name="subject"
@@ -60,23 +77,48 @@
     </div>
 
     <div class="animation-delay-400 animate-in slide-in-from-bottom-10">
-      <label class="block text-sm font-bold text-white uppercase tracking-wider mb-3">Email Body</label>
+      <label
+        class="block text-sm font-bold text-white uppercase tracking-wider mb-3"
+        >Email Body</label
+      >
 
-      <div class="border border-border-subtle rounded-xl overflow-hidden shadow-lg bg-background-dark focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
-        
-        <div class="bg-surface border-b border-border-subtle p-2 flex gap-1 items-center">
-          <button type="button" id="boldBtn" class="w-9 h-9 rounded-lg flex items-center justify-center text-text-muted hover:text-white hover:bg-[#1e1f32] transition-colors toolbar-btn" title="Bold">
+      <div
+        class="border border-border-subtle rounded-xl overflow-hidden shadow-lg bg-background-dark focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all"
+      >
+        <div
+          class="bg-surface border-b border-border-subtle p-2 flex gap-1 items-center"
+        >
+          <button
+            type="button"
+            id="boldBtn"
+            class="w-9 h-9 rounded-lg flex items-center justify-center text-text-muted hover:text-white hover:bg-[#1e1f32] transition-colors toolbar-btn"
+            title="Bold"
+          >
             <span class="material-symbols-outlined text-xl">format_bold</span>
           </button>
-          <button type="button" id="italicBtn" class="w-9 h-9 rounded-lg flex items-center justify-center text-text-muted hover:text-white hover:bg-[#1e1f32] transition-colors toolbar-btn" title="Italic">
+          <button
+            type="button"
+            id="italicBtn"
+            class="w-9 h-9 rounded-lg flex items-center justify-center text-text-muted hover:text-white hover:bg-[#1e1f32] transition-colors toolbar-btn"
+            title="Italic"
+          >
             <span class="material-symbols-outlined text-xl">format_italic</span>
           </button>
-          <button type="button" id="underlineBtn" class="w-9 h-9 rounded-lg flex items-center justify-center text-text-muted hover:text-white hover:bg-[#1e1f32] transition-colors toolbar-btn" title="Underline">
-            <span class="material-symbols-outlined text-xl">format_underlined</span>
+          <button
+            type="button"
+            id="underlineBtn"
+            class="w-9 h-9 rounded-lg flex items-center justify-center text-text-muted hover:text-white hover:bg-[#1e1f32] transition-colors toolbar-btn"
+            title="Underline"
+          >
+            <span class="material-symbols-outlined text-xl"
+              >format_underlined</span
+            >
           </button>
-          
+
           <div class="w-px h-5 bg-border-subtle mx-2"></div>
-          <span class="text-xs text-text-muted font-medium">Highlight text to format</span>
+          <span class="text-xs text-text-muted font-medium"
+            >Highlight text to format</span
+          >
         </div>
 
         <div
@@ -89,36 +131,67 @@
       </div>
     </div>
 
-    <div class="text-center pt-4 animation-delay-500 animate-in slide-in-from-bottom-10">
-      <button type="submit" id="submitBtn"
-        class="px-10 py-4 w-full sm:w-auto bg-primary hover:bg-primary-hover text-white rounded-xl shadow-xl shadow-primary/20 font-bold flex items-center justify-center gap-2 mx-auto transition-all active:scale-95 hover:-translate-y-0.5">
+    <div
+      class="text-center pt-4 animation-delay-500 animate-in slide-in-from-bottom-10"
+    >
+      <button
+        type="submit"
+        id="submitBtn"
+        class="px-10 py-4 w-full sm:w-auto bg-primary hover:bg-primary-hover text-white rounded-xl shadow-xl shadow-primary/20 font-bold flex items-center justify-center gap-2 mx-auto transition-all active:scale-95 hover:-translate-y-0.5"
+      >
         <span class="material-symbols-outlined">rocket_launch</span>
         Launch Campaign
       </button>
     </div>
-
   </form>
 </main>
 
 <style>
   /* Smooth entry animations */
   @keyframes slideInBottom {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  
-  .animate-in { animation-fill-mode: forwards; opacity: 0; }
-  .slide-in-from-bottom-10 { animation: slideInBottom 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  .animate-fade-in-down { animation: fadeInDown 0.6s ease-out forwards; }
-  
-  .animation-delay-200 { animation-delay: 150ms; }
-  .animation-delay-300 { animation-delay: 300ms; }
-  .animation-delay-400 { animation-delay: 450ms; }
-  .animation-delay-500 { animation-delay: 600ms; }
+
+  .animate-in {
+    animation-fill-mode: forwards;
+    opacity: 0;
+  }
+  .slide-in-from-bottom-10 {
+    animation: slideInBottom 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .animate-fade-in-down {
+    animation: fadeInDown 0.6s ease-out forwards;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 150ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 450ms;
+  }
+  .animation-delay-500 {
+    animation-delay: 600ms;
+  }
 
   /* Active Toolbar Button State */
   .toolbar-btn.active-format {
@@ -127,10 +200,19 @@
   }
 
   /* Custom Scrollbar */
-  .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-  .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #1e1f32; border-radius: 20px; }
-  .custom-scrollbar:hover::-webkit-scrollbar-thumb { background-color: #94a3b8; }
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #1e1f32;
+    border-radius: 20px;
+  }
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: #94a3b8;
+  }
 </style>
 
 <script>
@@ -181,21 +263,23 @@
   editor.addEventListener("touchend", checkActiveFormats);
 
   // Handle Form Submit
-  document.getElementById("campaignForm").addEventListener("submit", function() {
-    // Pass the HTML from the editor into the hidden input for Django
-    hiddenMessage.value = editor.innerHTML;
-    
-    // Add loading state to button
-    const submitBtn = document.getElementById("submitBtn");
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `
+  document
+    .getElementById("campaignForm")
+    .addEventListener("submit", function () {
+      // Pass the HTML from the editor into the hidden input for Django
+      hiddenMessage.value = editor.innerHTML;
+
+      // Add loading state to button
+      const submitBtn = document.getElementById("submitBtn");
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
       <svg class="animate-spin h-5 w-5 text-white inline" viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
       </svg>
       Sending Campaign...
     `;
-  });
+    });
 
   // Display selected file name
   function showFileName(input) {

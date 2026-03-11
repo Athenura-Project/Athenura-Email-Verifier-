@@ -1,59 +1,74 @@
-<div id="toast-container"
-     class="fixed top-6 right-6 z-[100] flex flex-col gap-4 w-full max-w-[380px]"></div>
+<div
+  id="toast-container"
+  class="fixed top-6 right-6 z-[100] flex flex-col gap-4 w-full max-w-[380px]"
+></div>
 
 <style>
-@keyframes toastSlideIn {
-    from { transform: translateX(120%) scale(0.9); opacity: 0; }
-    to { transform: translateX(0) scale(1); opacity: 1; }
-}
+  @keyframes toastSlideIn {
+    from {
+      transform: translateX(120%) scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+    }
+  }
 
-@keyframes toastFadeOut {
-    to { opacity: 0; transform: translateX(120%) scale(0.9); }
-}
+  @keyframes toastFadeOut {
+    to {
+      opacity: 0;
+      transform: translateX(120%) scale(0.9);
+    }
+  }
 
-.toast-enter {
+  .toast-enter {
     animation: toastSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
+  }
 
-.toast-exit {
+  .toast-exit {
     animation: toastFadeOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
+  }
 
-.toast-glass {
-    background: rgba(20, 21, 34, 0.8) !important; /* bg-surface with transparency */
+  .toast-glass {
+    background: rgba(
+      20,
+      21,
+      34,
+      0.8
+    ) !important; /* bg-surface with transparency */
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
-}
+  }
 </style>
 
 <script>
-function createToast(message, type="success", duration=4000) {
-
+  function createToast(message, type = "success", duration = 4000) {
     const configurations = {
-        success: {
-            border: "border-green-500/50",
-            iconColor: "text-green-400",
-            progress: "bg-green-500/40",
-            icon: "check_circle"
-        },
-        error: {
-            border: "border-red-500/50",
-            iconColor: "text-red-400",
-            progress: "bg-red-500/40",
-            icon: "report"
-        },
-        warning: {
-            border: "border-amber-500/50",
-            iconColor: "text-amber-400",
-            progress: "bg-amber-500/40",
-            icon: "warning"
-        },
-        info: {
-            border: "border-primary/50",
-            iconColor: "text-primary",
-            progress: "bg-primary/40",
-            icon: "info"
-        }
+      success: {
+        border: "border-green-500/50",
+        iconColor: "text-green-400",
+        progress: "bg-green-500/40",
+        icon: "check_circle",
+      },
+      error: {
+        border: "border-red-500/50",
+        iconColor: "text-red-400",
+        progress: "bg-red-500/40",
+        icon: "report",
+      },
+      warning: {
+        border: "border-amber-500/50",
+        iconColor: "text-amber-400",
+        progress: "bg-amber-500/40",
+        icon: "warning",
+      },
+      info: {
+        border: "border-primary/50",
+        iconColor: "text-primary",
+        progress: "bg-primary/40",
+        icon: "info",
+      },
     };
 
     const config = configurations[type] || configurations.info;
@@ -90,26 +105,26 @@ function createToast(message, type="success", duration=4000) {
     const progress = toast.querySelector(".progress-bar");
     progress.style.width = "calc(100% - 8px)";
     progress.style.transition = `width ${duration}ms linear`;
-    setTimeout(() => progress.style.width = "0%", 50);
+    setTimeout(() => (progress.style.width = "0%"), 50);
 
     // Auto Remove
     setTimeout(() => removeToast(toast), duration);
-}
+  }
 
-function removeToast(toast) {
+  function removeToast(toast) {
     if (!toast) return;
     toast.classList.remove("toast-enter");
     toast.classList.add("toast-exit");
     setTimeout(() => toast.remove(), 450);
-}
+  }
 </script>
 
 {% if messages %}
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    {% for message in messages %}
-        createToast("{{ message|escapejs }}", "{{ message.tags }}");
-    {% endfor %}
-});
+  document.addEventListener("DOMContentLoaded", function() {
+      {% for message in messages %}
+          createToast("{{ message|escapejs }}", "{{ message.tags }}");
+      {% endfor %}
+  });
 </script>
 {% endif %}

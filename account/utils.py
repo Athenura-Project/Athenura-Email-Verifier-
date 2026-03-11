@@ -14,7 +14,7 @@ def send_verification_email(user, verification_link):
 
     payload = {
         "sender": {
-            "name": "Athenura",
+            "name": settings.SENDER_NAME,
             "email": settings.DEFAULT_FROM_EMAIL
         },
         "to": [
@@ -34,7 +34,7 @@ def send_verification_email(user, verification_link):
 
     response = requests.post(url, json=payload, headers=headers)
 
-    print("Brevo response:", response.status_code, response.text)
+    # print("Brevo response:", response.status_code, response.text)
 
 
 def send_reset_email(recipient_email, reset_link):
@@ -49,7 +49,7 @@ def send_reset_email(recipient_email, reset_link):
 
     payload = {
         "sender": {
-            "name": "EmailPro",
+            "name": settings.SENDER_NAME,
             "email": settings.DEFAULT_FROM_EMAIL
         },
         "to": [

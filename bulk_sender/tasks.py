@@ -17,7 +17,7 @@ def send_email(self, recipient_id):
 
     payload = {
         "sender": {
-            "name": "Athenura",
+            "name": settings.SENDER_NAME,
             "email": settings.DEFAULT_FROM_EMAIL
         },
         "to": [

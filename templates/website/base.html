@@ -1,15 +1,16 @@
 {% load static %}
-
 <!doctype html>
-
 <html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>
-      {% block title %}Athenura{% endblock %}
-    </title>
-    <link rel="icon" type="image/x-icon" sizes="32x32" href="{% static 'images/favicon.ico' %}">
+    <title>{% block title %}Athenura{% endblock %}</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      sizes="32x32"
+      href="{% static 'images/favicon.ico' %}"
+    />
     {% block css %}{% endblock %}
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
@@ -35,13 +36,13 @@
         theme: {
           extend: {
             colors: {
-              primary: "#6366f1",            // Vibrant indigo for buttons/links
-              "primary-hover": "#4f46e5",    // Slightly darker for hover states
+              primary: "#6366f1", // Vibrant indigo for buttons/links
+              "primary-hover": "#4f46e5", // Slightly darker for hover states
               "background-light": "#f6f6f8", // Kept untouched for your light mode
-              "background-dark": "#0b0c15",  // Deep slate/indigo base background
-              "surface": "#141522",          // Cards, inputs, and icon circles
-              "text-muted": "#94a3b8",       // Grayish-blue for paragraphs
-              "border-subtle": "#1e1f32",    // Subtle divider lines
+              "background-dark": "#0b0c15", // Deep slate/indigo base background
+              surface: "#141522", // Cards, inputs, and icon circles
+              "text-muted": "#94a3b8", // Grayish-blue for paragraphs
+              "border-subtle": "#1e1f32", // Subtle divider lines
             },
             fontFamily: {
               display: ["Inter", "sans-serif"],
@@ -72,14 +73,10 @@
   <body
     class="bg-background-light dark:bg-background-dark text-[#0f0e1b] antialiased"
   >
-    {% include "website/components/navbar.html" %}
-
-    {% include "website/components/toast.html" %}
-
-    {% block content %}{% endblock %}
-
+    {% include "website/components/navbar.html" %} 
+    {% include "website/components/toast.html" %} 
+    {% block content %}{% endblock %} 
     {% include "website/components/footer.html" %}
-    
 
     <script>
       function togglePassword(fieldId, btn) {

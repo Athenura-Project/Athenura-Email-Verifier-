@@ -1,81 +1,179 @@
 {% load static %}
+
 <footer class="bg-background-dark pt-8 pb-6 border-t border-border-subtle">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
-      
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-start"
+    >
+      <!-- Logo + Description -->
       <div class="lg:col-span-4 flex flex-col">
         <a href="{% url 'home' %}" class="inline-block mb-4">
-          <img src="{% static 'images/White.png' %}" alt="Athenura" class="h-10" />
+          <img
+            src="{% static 'images/White.png' %}"
+            alt="Athenura"
+            class="h-10"
+          />
         </a>
+
+        ```
         <p class="text-text-muted text-xs leading-relaxed max-w-sm">
-          Next-generation verification and bulk processing tools. Scale your operations with precision.
+          Next-generation verification and bulk processing tools. Scale your
+          operations with precision.
         </p>
       </div>
 
+      <!-- Product -->
       <div class="lg:col-span-2">
-        <h3 class="text-white font-bold mb-4 text-xs uppercase tracking-widest">Product</h3>
+        <h3 class="text-white font-bold mb-4 text-xs uppercase tracking-widest">
+          Product
+        </h3>
+
         <ul class="space-y-2">
-          <li><a href="{% url 'bulk_sender:index' %}" class="text-text-muted hover:text-primary transition-colors text-xs">Bulk Actions</a></li>
-          <li><a href="{% url 'email_verifier:index' %}" class="text-text-muted hover:text-primary transition-colors text-xs">Verification</a></li>
+          <li>
+            <a
+              href="{% url 'bulk_sender:index' %}"
+              class="text-text-muted hover:text-primary transition-colors text-xs"
+            >
+              Bulk Actions
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="{% url 'email_verifier:index' %}"
+              class="text-text-muted hover:text-primary transition-colors text-xs"
+            >
+              Verification
+            </a>
+          </li>
         </ul>
       </div>
 
+      <!-- Company -->
       <div class="lg:col-span-2">
-        <h3 class="text-white font-bold mb-4 text-xs uppercase tracking-widest">Company</h3>
+        <h3 class="text-white font-bold mb-4 text-xs uppercase tracking-widest">
+          Company
+        </h3>
+
         <ul class="space-y-2">
-          <li><a href="{% url 'about' %}" class="text-text-muted hover:text-primary transition-colors text-xs">About Us</a></li>
+          <li>
+            <a
+              href="{% url 'about' %}"
+              class="text-text-muted hover:text-primary transition-colors text-xs"
+            >
+              About Us
+            </a>
+          </li>
         </ul>
       </div>
 
+      <!-- Legal -->
       <div class="lg:col-span-2">
-        <h3 class="text-white font-bold mb-4 text-xs uppercase tracking-widest">Legal</h3>
+        <h3 class="text-white font-bold mb-4 text-xs uppercase tracking-widest">
+          Legal
+        </h3>
+
         <ul class="space-y-2">
-          <li><a href="{% url 'terms_and_conditions' %}" class="text-text-muted hover:text-primary transition-colors text-xs">Terms & Conditions</a></li>
+          <li>
+            <a
+              href="{% url 'terms_and_conditions' %}"
+              class="text-text-muted hover:text-primary transition-colors text-xs"
+            >
+              Terms & Conditions
+            </a>
+          </li>
         </ul>
       </div>
 
+      <!-- System Status -->
       <div class="lg:col-span-2">
-  <div class="bg-surface/50 rounded-xl p-4 border border-border-subtle shadow-sm">
-    <h3 class="text-white font-semibold mb-1 text-xs">System Status</h3>
-    <div class="flex items-center gap-2 mb-3">
-      <span class="relative flex h-2 w-2">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-      </span>
-      <p class="text-[10px] font-bold text-green-500 uppercase tracking-widest">All Systems Live</p>
+        <div
+          class="bg-surface/50 rounded-xl p-4 border border-border-subtle shadow-sm"
+        >
+          <h3 class="text-white font-semibold mb-1 text-xs">System Status</h3>
+
+          <div class="flex items-center gap-2 mb-3">
+            <span class="relative flex h-2 w-2">
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"
+              ></span>
+
+              <span
+                class="relative inline-flex rounded-full h-2 w-2 bg-green-500"
+              ></span>
+            </span>
+
+            <p
+              class="text-[10px] font-bold text-green-500 uppercase tracking-widest"
+            >
+              All Systems Live
+            </p>
+          </div>
+
+          <p class="text-text-muted text-[10px] mb-3 leading-tight">
+            Verification & Bulk nodes are running at peak performance.
+          </p>
+
+          <a
+            href="#"
+            class="text-primary hover:text-white transition-colors text-[11px] font-bold flex items-center gap-1 group uppercase tracking-tighter"
+          >
+            View Metrics
+
+            <span
+              class="material-symbols-outlined text-xs group-hover:translate-x-0.5 transition-transform"
+            >
+              bar_chart
+            </span>
+          </a>
+        </div>
+      </div>
     </div>
-    <p class="text-text-muted text-[10px] mb-3 leading-tight">
-      Verification & Bulk nodes are running at peak performance.
-    </p>
-    <a href="#" class="text-primary hover:text-white transition-colors text-[11px] font-bold flex items-center gap-1 group uppercase tracking-tighter">
-      View Metrics <span class="material-symbols-outlined text-xs group-hover:translate-x-0.5 transition-transform">bar_chart</span>
-    </a>
-  </div>
-</div>
-      </div>
-    </div>
 
-    <div class="mt-10 pt-6 border-t border-white/5 flex flex-col md:row justify-between items-center gap-4">
+    <!-- Bottom Footer -->
+    <div
+      class="mt-10 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4"
+    >
       <p class="text-text-muted text-[10px] font-medium opacity-60">
         &copy; {% now "Y" %} Athenura Inc. All rights reserved.
       </p>
 
+      <!-- Social Icons -->
       <div class="flex items-center gap-2">
-        <a href="https://www.linkedin.com/company/athenura/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BA%2BVpZoJvQuSCidx8Y7LjFw%3D%3D" class="w-7 h-7 rounded-lg bg-surface border border-border-subtle flex items-center justify-center text-text-muted hover:text-primary hover:border-primary transition-all">
+        <a
+          href="https://www.linkedin.com/company/athenura/"
+          class="w-7 h-7 rounded-lg bg-surface border border-border-subtle flex items-center justify-center text-text-muted hover:text-primary hover:border-primary transition-all"
+        >
           <i class="fa-brands fa-linkedin-in text-xs"></i>
         </a>
-        <a href="https://x.com/athenura_in" class="w-7 h-7 rounded-lg bg-surface border border-border-subtle flex items-center justify-center text-text-muted hover:text-white hover:border-white transition-all">
+
+        <a
+          href="https://x.com/athenura_in"
+          class="w-7 h-7 rounded-lg bg-surface border border-border-subtle flex items-center justify-center text-text-muted hover:text-white hover:border-white transition-all"
+        >
           <i class="fa-brands fa-x-twitter text-xs"></i>
         </a>
-        <a href="https://athenura.medium.com/" class="w-7 h-7 rounded-lg bg-surface border border-border-subtle flex items-center justify-center text-text-muted hover:text-white hover:border-white transition-all">
+
+        <a
+          href="https://athenura.medium.com/"
+          class="w-7 h-7 rounded-lg bg-surface border border-border-subtle flex items-center justify-center text-text-muted hover:text-white hover:border-white transition-all"
+        >
           <i class="fa-brands fa-medium text-xs"></i>
         </a>
-     <a href="https://www.instagram.com/athenura.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="w-7 h-7 rounded-lg bg-surface border border-border-subtle flex items-center justify-center text-text-muted hover:text-pink-500 hover:border-pink-500 transition-all shadow-sm">
-  <i class="fa-brands fa-instagram text-xs"></i>
-</a>
+
+        <a
+          href="https://www.instagram.com/athenura.in"
+          class="w-7 h-7 rounded-lg bg-surface border border-border-subtle flex items-center justify-center text-text-muted hover:text-pink-500 hover:border-pink-500 transition-all shadow-sm"
+        >
+          <i class="fa-brands fa-instagram text-xs"></i>
+        </a>
       </div>
     </div>
+    ```
   </div>
 </footer>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>

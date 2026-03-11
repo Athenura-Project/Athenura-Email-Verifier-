@@ -49,28 +49,33 @@
             >
               <div class="text-right hidden sm:block">
                 <p class="text-sm font-semibold text-white">
-                  {{ request.user.full_name }}
+                  {{ request.user.full_name|title }}
                 </p>
                 <p class="text-xs text-primary">{{ request.user.email }}</p>
               </div>
 
-              <div class="relative h-10 w-10 rounded-full border-2 border-primary/30 transition-all duration-300 group-hover:scale-105 group-hover:border-primary">
-    
-    <div class="h-full w-full rounded-full overflow-hidden">
-        {% if request.user.profile.profile_image %}
-        <img
-            src="{{ request.user.profile.profile_image.url }}"
-            class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-        />
-        {% else %}
-        <div class="h-full w-full flex items-center justify-center bg-gradient-to-br from-primary to-indigo-500 text-white font-bold text-lg">
-            {{ request.user.full_name|first|upper }}
-        </div>
-        {% endif %}
-    </div>
+              <div
+                class="relative h-10 w-10 rounded-full border-2 border-primary/30 transition-all duration-300 group-hover:scale-105 group-hover:border-primary"
+              >
+                <div class="h-full w-full rounded-full overflow-hidden">
+                  {% if request.user.profile.profile_image %}
+                  <img
+                    src="{{ request.user.profile.profile_image.url }}"
+                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  {% else %}
+                  <div
+                    class="h-full w-full flex items-center justify-center bg-gradient-to-br from-primary to-indigo-500 text-white font-bold text-lg"
+                  >
+                    {{ request.user.full_name|first|upper }}
+                  </div>
+                  {% endif %}
+                </div>
 
-    <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 border-2 border-background-dark transform translate-x-1/4 translate-y-1/4 z-10"></span>
-</div>
+                <span
+                  class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 border-2 border-background-dark transform translate-x-1/4 translate-y-1/4 z-10"
+                ></span>
+              </div>
             </button>
 
             <div
