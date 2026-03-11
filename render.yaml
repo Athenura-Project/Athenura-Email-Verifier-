@@ -2,11 +2,11 @@ services:
   - type: web
     name: email-verifier
     runtime: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn email_system.wsgi:application"
+    buildCommand: pip install -r requirements.txt
+    startCommand: python manage.py migrate && python manage.py collectstatic --noinput && gunicorn email_system.wsgi:application --bind 0.0.0.0:$PORT
 
   - type: worker
     name: celery-worker
     runtime: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "celery -A email_system worker -l info"
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery -A email_system worker -l info
