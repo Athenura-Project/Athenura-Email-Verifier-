@@ -34,9 +34,6 @@ staticfiles/
 .DS_Store
 Thumbs.db
 
-# Migrations (optional keep/remove)
-**/migrations/*
-!**/migrations/__init__.py
 
 # Test & coverage
 htmlcov/
