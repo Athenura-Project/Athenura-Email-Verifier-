@@ -1,0 +1,44 @@
+/* Smooth entry animations */
+@keyframes slideInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+.slide-in-from-bottom-10 {
+  animation: slideInBottom 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-fade-in-down {
+  animation: fadeInDown 0.6s ease-out forwards;
+}
+
+.animation-delay-300 {
+  animation-delay: 200ms;
+}
+.animation-delay-400 {
+  animation-delay: 350ms;
+}
+
+/* Smooth scrolling logic for anchor links */
+html {
+  scroll-behavior: smooth;
+}

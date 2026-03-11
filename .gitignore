@@ -21,8 +21,6 @@ media/
 # Environment variables (VERY IMPORTANT)
 .env
 
-# Static files (collected)
-staticfiles/
 
 # VS Code
 .vscode/
