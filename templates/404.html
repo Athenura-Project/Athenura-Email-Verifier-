@@ -1,0 +1,91 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>404 - Page Not Found</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              "primary-hover": "#4f46e5",
+              "background-light": "#f6f6f8",
+              "background-dark": "#0b0c15",
+              surface: "#141522",
+              "text-muted": "#94a3b8",
+              "border-subtle": "#1e1f32",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-background-dark min-h-screen flex items-center justify-center px-6"
+  >
+    <div
+      class="w-full max-w-5xl bg-surface border border-border-subtle rounded-xl shadow-xl flex flex-col md:flex-row items-center gap-10 p-10"
+    >
+      <!-- Left Illustration -->
+      <div class="flex-1 flex justify-center">
+        <div class="relative w-40 h-64">
+          <!-- cable -->
+          <div
+            class="absolute left-1/2 top-0 w-1 h-full bg-primary/30 rounded-full"
+          ></div>
+
+          <!-- plug top -->
+          <div
+            class="absolute top-10 left-1/2 -translate-x-1/2 bg-primary w-8 h-8 rounded-lg"
+          ></div>
+
+          <!-- plug bottom -->
+          <div
+            class="absolute bottom-10 left-1/2 -translate-x-1/2 bg-primary w-8 h-8 rounded-lg"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Right Content -->
+      <div class="flex-1 text-center md:text-left">
+        <h1 class="text-6xl font-extrabold text-white mb-3">404</h1>
+
+        <h2 class="text-xl font-semibold text-white mb-2">Page Not Found</h2>
+
+        <p class="text-text-muted mb-6 max-w-md">
+          We're sorry, the page you requested could not be found. Please go back
+          to the homepage.
+        </p>
+
+        <a
+          href="{% url 'home' %}"
+          class="inline-block bg-primary hover:bg-primary-hover text-white font-medium px-6 py-3 rounded-lg transition"
+        >
+          Go Home
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
