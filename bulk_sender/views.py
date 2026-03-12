@@ -43,7 +43,7 @@ def index(request):
             recipients = Recipient.objects.filter(campaign=campaign)
 
             job = group(
-                send_email.delay(recipient.id)
+                send_email.s(recipient.id)
                 for recipient in recipients
             )
 
