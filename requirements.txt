@@ -21,7 +21,8 @@ packaging==26.0
 pandas==3.0.0
 pillow==12.1.1
 prompt_toolkit==3.0.52
-psycopg2==2.9.11
+psycopg==3.3.3
+psycopg-binary==3.3.3
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.1
 redis==7.1.0
@@ -34,3 +35,4 @@ tzlocal==5.3.1
 urllib3==2.6.3
 vine==5.1.0
 wcwidth==0.6.0
+whitenoise==6.12.0
